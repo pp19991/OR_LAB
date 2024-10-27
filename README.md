@@ -4,7 +4,7 @@ Bundesliga je najviša profesionalna nogometna liga u njemačkoj i održava se o
 ## Metapodaci
 - **Naziv skupa podataka**: podaci o Bundesliga klubovima, terenima, igračima i trenerima
 - **Licencija**: Creative Commons Zero v1.0 Universal(CC0 1.0 Universal)
-- **Kratki opis licencije**:slobodno se može koristiti, djeliti i stvarati prerade
+- **Kratki opis licencije**:podaci se mogu slobodno koristiti, djeliti i stvarati prerade
 - **Autor**: Patrik Pašić
 - **Verzija**: v1.0
 - **Jezik podataka**: hrvatski jezik
