@@ -3,7 +3,7 @@ Ovaj skup podataka sadrži informacije o klubovima, igračima, trenerima i stadi
 Bundesliga je najviša profesionalna nogometna liga u njemačkoj i održava se od 1963. godine.
 ## Metapodaci
 - **Naziv skupa podataka**: podaci o Bundesliga klubovima, terenima, igračima i trenerima
-- **Licencija**: Creative Commons Attribution 4.0 International (CC BY 4.0) -slobodno se može koristiti, djeliti i stvarati prerade uz adekvatno navodenje autora
+- **Licencija**: Creative Commons Zero v1.0 Universal(CC0 1.0 Universal)
 - **Autor**: Patrik Pašić
 - **Verzija**: v1.0
 - **Jezik podataka**: hrvatski jezik
