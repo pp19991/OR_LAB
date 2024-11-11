@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <link rel="stylesheet" href="datatable.css">
+  </head>
+  <body>
+    
+    <form class="forma">
+        <label for="uv" >Polje za pretragu</label>
+        <input type="text" id="uv" name="vrptr" class="input">
+        
+        <label for="tablica">Odaberi tablicu:</label>
+        <select name="tablica" id="tablica" onchange="promjeni()" class="select">
+            <option value="stadioni">Stadion</option>
+            <option value="klubovi">Klub</option>
+            <option value="treneri">Trener</option>
+            <option value="igraci">Igraci</option>
+        </select>
+      
+      
+        <label for="atribut">Odaberi polje za pretragu:</label>
+        <select name="atribut" id="atribut"  class="select">
+            <option value="sva">Sva polja(wildcard)</option>
+            <option value="naziv">Naziv</option>
+            <option value="kapacitet">Kapacitet</option>
+            <option value="godina_osnutka">Godina_osnutka</option>
+        </select>
+      
+
+        <button type="button" onclick="prikazi()" class="button">Pretraži</button>
+    </form>
+    <div id="linkovi" class="linkovi"></div>
+    <table id="prostor"></table>
+
+    <script src="datatable.js"></script>
+  
+  </body>
+</html>
