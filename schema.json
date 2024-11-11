@@ -1,0 +1,2821 @@
+{
+  "$schema": "https://json-schema.org/draft/2019-09/schema",
+  "$id": "http://localhost:5500/schema.json",
+  "type": "array",
+  "default": [],
+  "title": "Bundesliga klubovi",
+  "description": "Skup podataka o bundesliga klubovima",
+  "items": {
+    "type": "object",
+    "title": "Tablica klub",
+    "description": "Tablica koja prikazuje podatke o klubovima",
+    "required": [
+      "naziv",
+      "grad",
+      "godina_osnutka",
+      "stadion",
+      "trener",
+      "broj_trofeja_ligi",
+      "igraci",
+      "broj_igraca",
+      "prosjek_godina",
+      "broj_bodova_prosle_godine",
+      "broj_ligi_prvaka",
+      "broj_kupova",
+      "tm_vrijednost"
+    ],
+    "properties": {
+      "naziv": {
+        "type": "string",
+        "title": "Atribut naziv",
+        "description": "Atribut naziv je naziv kluba",
+        "examples": [
+          "Bayern Munich",
+          "Bayer Leverkusen",
+          "Wolfsburg",
+          "SV Werder Bremen",
+          "Stuttgart",
+          "Union Berlin",
+          "FC Augsburg",
+          "Borussia Dortmund",
+          "Eintracht Frankfurt",
+          "1. FSV Mainz 05",
+          "SC Freiburg",
+          "TSG Hoffenheim",
+          "RB Leipzig",
+          "Borussia Mönchengladbach"
+        ]
+      },
+      "grad": {
+        "type": "string",
+        "title": "Atribut grad",
+        "description": "Atribut grad je u kojem se gradu klub nalazi",
+        "examples": [
+          "Munich",
+          "Leverkusen",
+          "Wolfsburg",
+          "Bremen",
+          "Stuttgart",
+          "Berlin",
+          "Augsburg",
+          "Dortmund",
+          "Frankfurt",
+          "Mainz",
+          "Freiburg",
+          "Sinsheim",
+          "Leipzig",
+          "Mönchengladbach"
+        ]
+      },
+      "godina_osnutka": {
+        "type": "integer",
+        "title": "godina_osnutka atribut",
+        "description": "Atribut godina_osnutka je godina kada se osnovao klub",
+        "examples": [1900, 1904, 1945, 1899, 1893, 1966, 1907, 1909, 1905, 2009]
+      },
+      "stadion": {
+        "type": "object",
+        "title": "Tablica stadion",
+        "description": "Tablica koja prikazuje podatke o stadionima",
+        "required": ["naziv", "kapacitet", "godina_osnutka"],
+        "properties": {
+          "naziv": {
+            "type": "string",
+            "title": "naziv atribut",
+            "description": "Atribut naziv je naziv stadiona",
+            "examples": [
+              "Allianz Arena",
+              "BayArena",
+              "Volkswagen Arena",
+              "Wohninvest Weserstadion",
+              "Mercedes-Benz Arena",
+              "Stadion An der Alten Försterei",
+              "WWK Arena",
+              "Signal Iduna Park",
+              "Deutsche Bank Park",
+              "Mewa Arena",
+              "Europa-Park Stadion",
+              "PreZero Arena",
+              "Red Bull Arena",
+              "Borussia-Park"
+            ]
+          },
+          "kapacitet": {
+            "type": "integer",
+            "title": "kapacitet atribut",
+            "description": "Atribut kapacitet je kapacitet stadiona",
+            "examples": [
+              75024, 30210, 30000, 42100, 60441, 22012, 30660, 81365, 51500,
+              34000, 34700, 30150, 47800, 54057
+            ]
+          },
+          "godina_osnutka": {
+            "type": "integer",
+            "title": "godina_osnutka atribut",
+            "description": "Atribut godina_osnutka je godina kada se otvorio stadion",
+            "examples": [
+              2005, 1958, 2002, 1909, 1933, 1920, 2009, 1974, 1925, 2011, 2021,
+              2010, 2004
+            ]
+          }
+        },
+        "examples": [
+          {
+            "naziv": "Allianz Arena",
+            "kapacitet": 75024,
+            "godina_osnutka": 2005
+          },
+          {
+            "naziv": "BayArena",
+            "kapacitet": 30210,
+            "godina_osnutka": 1958
+          },
+          {
+            "naziv": "Volkswagen Arena",
+            "kapacitet": 30000,
+            "godina_osnutka": 2002
+          },
+          {
+            "naziv": "Wohninvest Weserstadion",
+            "kapacitet": 42100,
+            "godina_osnutka": 1909
+          },
+          {
+            "naziv": "Mercedes-Benz Arena",
+            "kapacitet": 60441,
+            "godina_osnutka": 1933
+          },
+          {
+            "naziv": "Stadion An der Alten Försterei",
+            "kapacitet": 22012,
+            "godina_osnutka": 1920
+          },
+          {
+            "naziv": "WWK Arena",
+            "kapacitet": 30660,
+            "godina_osnutka": 2009
+          },
+          {
+            "naziv": "Signal Iduna Park",
+            "kapacitet": 81365,
+            "godina_osnutka": 1974
+          },
+          {
+            "naziv": "Deutsche Bank Park",
+            "kapacitet": 51500,
+            "godina_osnutka": 1925
+          },
+          {
+            "naziv": "Mewa Arena",
+            "kapacitet": 34000,
+            "godina_osnutka": 2011
+          },
+          {
+            "naziv": "Europa-Park Stadion",
+            "kapacitet": 34700,
+            "godina_osnutka": 2021
+          },
+          {
+            "naziv": "PreZero Arena",
+            "kapacitet": 30150,
+            "godina_osnutka": 2009
+          },
+          {
+            "naziv": "Red Bull Arena",
+            "kapacitet": 47800,
+            "godina_osnutka": 2010
+          },
+          {
+            "naziv": "Borussia-Park",
+            "kapacitet": 54057,
+            "godina_osnutka": 2004
+          }
+        ]
+      },
+      "trener": {
+        "type": "object",
+        "title": "tablica trener",
+        "description": "Tablica koja prikazuje podatke o trenerima",
+        "required": ["id", "ime", "prezime"],
+        "properties": {
+          "id": {
+            "type": "integer",
+            "title": "The id Schema",
+            "description": "Atribut id je id trenera",
+            "examples": [1, 6, 5, 14, 4, 11, 10, 2, 7, 13, 12, 9, 3, 8]
+          },
+          "ime": {
+            "type": "string",
+            "title": "ime atribut",
+            "description": "Atribut ime je ime trenera",
+            "examples": [
+              "Vincent",
+              "Xabi",
+              "Ralph",
+              "Ole",
+              "Sebastian",
+              "Bo",
+              "Jess",
+              "Nuri",
+              "Dino",
+              "Julian",
+              "Pellegrino",
+              "Marco",
+              "Gerardo"
+            ]
+          },
+          "prezime": {
+            "type": "string",
+            "title": "prezime atribut",
+            "description": "Atribut prezima je prezime trenera",
+            "examples": [
+              "Kompany",
+              "Alonso",
+              "Hasenhüttl",
+              "Werner",
+              "Hoeneß",
+              "Svensson",
+              "Thorup",
+              "Sahin",
+              "Toppmöller",
+              "Henriksen",
+              "Schuster",
+              "Matarazzo",
+              "Rose",
+              "Seoane"
+            ]
+          }
+        },
+        "examples": [
+          {
+            "id": 1,
+            "ime": "Vincent",
+            "prezime": "Kompany"
+          },
+          {
+            "id": 6,
+            "ime": "Xabi",
+            "prezime": "Alonso"
+          },
+          {
+            "id": 5,
+            "ime": "Ralph",
+            "prezime": "Hasenhüttl"
+          },
+          {
+            "id": 14,
+            "ime": "Ole",
+            "prezime": "Werner"
+          },
+          {
+            "id": 4,
+            "ime": "Sebastian",
+            "prezime": "Hoeneß"
+          },
+          {
+            "id": 11,
+            "ime": "Bo",
+            "prezime": "Svensson"
+          },
+          {
+            "id": 10,
+            "ime": "Jess",
+            "prezime": "Thorup"
+          },
+          {
+            "id": 2,
+            "ime": "Nuri",
+            "prezime": "Sahin"
+          },
+          {
+            "id": 7,
+            "ime": "Dino",
+            "prezime": "Toppmöller"
+          },
+          {
+            "id": 13,
+            "ime": "Bo",
+            "prezime": "Henriksen"
+          },
+          {
+            "id": 12,
+            "ime": "Julian",
+            "prezime": "Schuster"
+          },
+          {
+            "id": 9,
+            "ime": "Pellegrino",
+            "prezime": "Matarazzo"
+          },
+          {
+            "id": 3,
+            "ime": "Marco",
+            "prezime": "Rose"
+          },
+          {
+            "id": 8,
+            "ime": "Gerardo",
+            "prezime": "Seoane"
+          }
+        ]
+      },
+      "broj_trofeja_ligi": {
+        "type": "integer",
+        "title": "broj_trofeja_ligi atribut",
+        "description": "Atribut broj_trofeja_ligi je koliko je klub osvojio trofeja ligi",
+        "examples": [33, 1, 4, 5, 0, 8]
+      },
+      "igraci": {
+        "type": "array",
+        "title": "Tablica igraci",
+        "description": "Tablica koja prikazuje podatke o igracima",
+        "items": {
+          "type": "object",
+          "title": "A Schema",
+          "required": ["id", "ime", "prezime", "pozicija", "klub"],
+          "properties": {
+            "id": {
+              "type": "integer",
+              "title": "id atribut",
+              "examples": [
+                4, 3, 2, 1, 24, 23, 22, 21, 20, 19, 18, 17, 56, 55, 54, 53, 16,
+                15, 14, 13, 44, 43, 42, 41, 40, 39, 38, 37, 8, 7, 6, 5, 28, 27,
+                26, 25, 52, 51, 50, 49, 48, 47, 46, 45, 36, 35, 34, 33, 12, 11,
+                10, 9, 32, 31, 30, 29
+              ]
+            },
+            "ime": {
+              "type": "string",
+              "title": "ime atribut",
+             "description": "Atribut ime je ime igraca",
+              "examples": [
+                "Alphonso",
+                "Harry",
+                "Manuel",
+                "Thomas",
+                "Jonathan",
+                "Jeremie",
+                "Victor",
+                "Florian",
+                "Kamil",
+                "Sebastiaan",
+                "Maximilian",
+                "Jonas",
+                "Romano",
+                "Leonardo",
+                "Miloš",
+                "Michael",
+                "Alexander",
+                "Jeff",
+                "Enzo",
+                "Deniz",
+                "Janik",
+                "Frederik",
+                "Lucas",
+                "Diogo",
+                "Jeffrey",
+                "Robert",
+                "Finn",
+                "Emre",
+                "Gregor",
+                "Yan",
+                "Niklas",
+                "Robin",
+                "Ansgar",
+                "Mario",
+                "Omar",
+                "Dominik",
+                "Jae-Sung",
+                "Vincenzo",
+                "Ritsu",
+                "Matthias",
+                "Dennis",
+                "Ozan",
+                "Oliver",
+                "Andrej",
+                "Yussuf",
+                "Lukas",
+                "David",
+                "Xavi",
+                "Ko",
+                "Luca",
+                "Joe",
+                "Julian"
+              ]
+            },
+            "prezime": {
+              "type": "string",
+              "title": "prezime atribut",
+              "description": "Atribut prezime je prezime igraca",
+              "examples": [
+                "Davies",
+                "Kane",
+                "Neuer",
+                "Müller",
+                "Tah",
+                "Frimpong",
+                "Boniface",
+                "Wirtz",
+                "Grabara",
+                "Bornauw",
+                "Arnold",
+                "Wind",
+                "Schmid",
+                "Bittencourt",
+                "Veljković",
+                "Zetterer",
+                "Nübel",
+                "Chabot",
+                "Millot",
+                "Undav",
+                "Haberer",
+                "Rønnow",
+                "Tousart",
+                "Leite",
+                "Gouweleeuw",
+                "Gumny",
+                "Bauer",
+                "Dahmen",
+                "Can",
+                "Kobel",
+                "Couto",
+                "Sule",
+                "Koch",
+                "Knauff",
+                "Götze",
+                "Marmoush",
+                "Kohr",
+                "Burkardt",
+                "Lee",
+                "Zentner",
+                "Grifo",
+                "Doan",
+                "Eggestein",
+                "Ginter",
+                "Geiger",
+                "Kabak",
+                "Baumann",
+                "Kramarić",
+                "Poulsen",
+                "Klostermann",
+                "Raum",
+                "Simons",
+                "Itakura",
+                "Netz",
+                "Scally",
+                "Weigl"
+              ]
+            },
+            "pozicija": {
+              "type": "string",
+              "title": "pozicija atribut",
+              "description": "Atribut pozicija je generalna pozicija igraca",
+              "examples": ["Obrana", "Napadač", "Golman", "Vezni"]
+            },
+            "klub": {
+              "type": "string",
+              "title": "Tablica klub",
+              "description": "Tablica klub sadrzi podatke o BundesLiga klubovima",
+              "examples": [
+                "Bayern Munich",
+                "Bayer Leverkusen",
+                "Wolfsburg",
+                "SV Werder Bremen",
+                "Stuttgart",
+                "Union Berlin",
+                "FC Augsburg",
+                "Borussia Dortmund",
+                "Eintracht Frankfurt",
+                "1. FSV Mainz 05",
+                "SC Freiburg",
+                "TSG Hoffenheim",
+                "RB Leipzig",
+                "Borussia Mönchengladbach"
+              ]
+            }
+          },
+          "examples": [
+            {
+              "id": 4,
+              "ime": "Alphonso",
+              "prezime": "Davies",
+              "pozicija": "Obrana",
+              "klub": "Bayern Munich"
+            },
+            {
+              "id": 3,
+              "ime": "Harry",
+              "prezime": "Kane",
+              "pozicija": "Napadač",
+              "klub": "Bayern Munich"
+            },
+            {
+              "id": 2,
+              "ime": "Manuel",
+              "prezime": "Neuer",
+              "pozicija": "Golman",
+              "klub": "Bayern Munich"
+            },
+            {
+              "id": 1,
+              "ime": "Thomas",
+              "prezime": "Müller",
+              "pozicija": "Napadač",
+              "klub": "Bayern Munich"
+            },
+            {
+              "id": 24,
+              "ime": "Jonathan",
+              "prezime": "Tah",
+              "pozicija": "Obrana",
+              "klub": "Bayer Leverkusen"
+            },
+            {
+              "id": 23,
+              "ime": "Jeremie",
+              "prezime": "Frimpong",
+              "pozicija": "Obrana",
+              "klub": "Bayer Leverkusen"
+            },
+            {
+              "id": 22,
+              "ime": "Victor",
+              "prezime": "Boniface",
+              "pozicija": "Napadač",
+              "klub": "Bayer Leverkusen"
+            },
+            {
+              "id": 21,
+              "ime": "Florian",
+              "prezime": "Wirtz",
+              "pozicija": "Vezni",
+              "klub": "Bayer Leverkusen"
+            },
+            {
+              "id": 20,
+              "ime": "Kamil",
+              "prezime": "Grabara",
+              "pozicija": "Golman",
+              "klub": "Wolfsburg"
+            },
+            {
+              "id": 19,
+              "ime": "Sebastiaan",
+              "prezime": "Bornauw",
+              "pozicija": "Obrana",
+              "klub": "Wolfsburg"
+            },
+            {
+              "id": 18,
+              "ime": "Maximilian",
+              "prezime": "Arnold",
+              "pozicija": "Vezni",
+              "klub": "Wolfsburg"
+            },
+            {
+              "id": 17,
+              "ime": "Jonas",
+              "prezime": "Wind",
+              "pozicija": "Napadač",
+              "klub": "Wolfsburg"
+            },
+            {
+              "id": 56,
+              "ime": "Romano",
+              "prezime": "Schmid",
+              "pozicija": "Vezni",
+              "klub": "SV Werder Bremen"
+            },
+            {
+              "id": 55,
+              "ime": "Leonardo",
+              "prezime": "Bittencourt",
+              "pozicija": "Vezni",
+              "klub": "SV Werder Bremen"
+            },
+            {
+              "id": 54,
+              "ime": "Miloš",
+              "prezime": "Veljković",
+              "pozicija": "Obrana",
+              "klub": "SV Werder Bremen"
+            },
+            {
+              "id": 53,
+              "ime": "Michael",
+              "prezime": "Zetterer",
+              "pozicija": "Golman",
+              "klub": "SV Werder Bremen"
+            },
+            {
+              "id": 16,
+              "ime": "Alexander",
+              "prezime": "Nübel",
+              "pozicija": "Golman",
+              "klub": "Stuttgart"
+            },
+            {
+              "id": 15,
+              "ime": "Jeff",
+              "prezime": "Chabot",
+              "pozicija": "Obrana",
+              "klub": "Stuttgart"
+            },
+            {
+              "id": 14,
+              "ime": "Enzo",
+              "prezime": "Millot",
+              "pozicija": "Vezni",
+              "klub": "Stuttgart"
+            },
+            {
+              "id": 13,
+              "ime": "Deniz",
+              "prezime": "Undav",
+              "pozicija": "Napadač",
+              "klub": "Stuttgart"
+            },
+            {
+              "id": 44,
+              "ime": "Janik",
+              "prezime": "Haberer",
+              "pozicija": "Vezni",
+              "klub": "Union Berlin"
+            },
+            {
+              "id": 43,
+              "ime": "Frederik",
+              "prezime": "Rønnow",
+              "pozicija": "Golman",
+              "klub": "Union Berlin"
+            },
+            {
+              "id": 42,
+              "ime": "Lucas",
+              "prezime": "Tousart",
+              "pozicija": "Vezni",
+              "klub": "Union Berlin"
+            },
+            {
+              "id": 41,
+              "ime": "Diogo",
+              "prezime": "Leite",
+              "pozicija": "Obrana",
+              "klub": "Union Berlin"
+            },
+            {
+              "id": 40,
+              "ime": "Jeffrey",
+              "prezime": "Gouweleeuw",
+              "pozicija": "Obrana",
+              "klub": "FC Augsburg"
+            },
+            {
+              "id": 39,
+              "ime": "Robert",
+              "prezime": "Gumny",
+              "pozicija": "Obrana",
+              "klub": "FC Augsburg"
+            },
+            {
+              "id": 38,
+              "ime": "Maximilian",
+              "prezime": "Bauer",
+              "pozicija": "Obrana",
+              "klub": "FC Augsburg"
+            },
+            {
+              "id": 37,
+              "ime": "Finn",
+              "prezime": "Dahmen",
+              "pozicija": "Golman",
+              "klub": "FC Augsburg"
+            },
+            {
+              "id": 8,
+              "ime": "Emre",
+              "prezime": "Can",
+              "pozicija": "Vezni",
+              "klub": "Borussia Dortmund"
+            },
+            {
+              "id": 7,
+              "ime": "Gregor",
+              "prezime": "Kobel",
+              "pozicija": "Golman",
+              "klub": "Borussia Dortmund"
+            },
+            {
+              "id": 6,
+              "ime": "Yan",
+              "prezime": "Couto",
+              "pozicija": "Obrana",
+              "klub": "Borussia Dortmund"
+            },
+            {
+              "id": 5,
+              "ime": "Niklas",
+              "prezime": "Sule",
+              "pozicija": "Obrana",
+              "klub": "Borussia Dortmund"
+            },
+            {
+              "id": 28,
+              "ime": "Robin",
+              "prezime": "Koch",
+              "pozicija": "Obrana",
+              "klub": "Eintracht Frankfurt"
+            },
+            {
+              "id": 27,
+              "ime": "Ansgar",
+              "prezime": "Knauff",
+              "pozicija": "Obrana",
+              "klub": "Eintracht Frankfurt"
+            },
+            {
+              "id": 26,
+              "ime": "Mario",
+              "prezime": "Götze",
+              "pozicija": "Vezni",
+              "klub": "Eintracht Frankfurt"
+            },
+            {
+              "id": 25,
+              "ime": "Omar",
+              "prezime": "Marmoush",
+              "pozicija": "Napadač",
+              "klub": "Eintracht Frankfurt"
+            },
+            {
+              "id": 52,
+              "ime": "Dominik",
+              "prezime": "Kohr",
+              "pozicija": "Vezni",
+              "klub": "1. FSV Mainz 05"
+            },
+            {
+              "id": 51,
+              "ime": "Jonathan",
+              "prezime": "Burkardt",
+              "pozicija": "Napadač",
+              "klub": "1. FSV Mainz 05"
+            },
+            {
+              "id": 50,
+              "ime": "Jae-Sung",
+              "prezime": "Lee",
+              "pozicija": "Vezni",
+              "klub": "1. FSV Mainz 05"
+            },
+            {
+              "id": 49,
+              "ime": "Robin",
+              "prezime": "Zentner",
+              "pozicija": "Golman",
+              "klub": "1. FSV Mainz 05"
+            },
+            {
+              "id": 48,
+              "ime": "Vincenzo",
+              "prezime": "Grifo",
+              "pozicija": "Napadač",
+              "klub": "SC Freiburg"
+            },
+            {
+              "id": 47,
+              "ime": "Ritsu",
+              "prezime": "Doan",
+              "pozicija": "Napadač",
+              "klub": "SC Freiburg"
+            },
+            {
+              "id": 46,
+              "ime": "Maximilian",
+              "prezime": "Eggestein",
+              "pozicija": "Vezni",
+              "klub": "SC Freiburg"
+            },
+            {
+              "id": 45,
+              "ime": "Matthias",
+              "prezime": "Ginter",
+              "pozicija": "Obrana",
+              "klub": "SC Freiburg"
+            },
+            {
+              "id": 36,
+              "ime": "Dennis",
+              "prezime": "Geiger",
+              "pozicija": "Vezni",
+              "klub": "TSG Hoffenheim"
+            },
+            {
+              "id": 35,
+              "ime": "Ozan",
+              "prezime": "Kabak",
+              "pozicija": "Obrana",
+              "klub": "TSG Hoffenheim"
+            },
+            {
+              "id": 34,
+              "ime": "Oliver",
+              "prezime": "Baumann",
+              "pozicija": "Golman",
+              "klub": "TSG Hoffenheim"
+            },
+            {
+              "id": 33,
+              "ime": "Andrej",
+              "prezime": "Kramarić",
+              "pozicija": "Napadač",
+              "klub": "TSG Hoffenheim"
+            },
+            {
+              "id": 12,
+              "ime": "Yussuf",
+              "prezime": "Poulsen",
+              "pozicija": "Napadač",
+              "klub": "RB Leipzig"
+            },
+            {
+              "id": 11,
+              "ime": "Lukas",
+              "prezime": "Klostermann",
+              "pozicija": "Obrana",
+              "klub": "RB Leipzig"
+            },
+            {
+              "id": 10,
+              "ime": "David",
+              "prezime": "Raum",
+              "pozicija": "Obrana",
+              "klub": "RB Leipzig"
+            },
+            {
+              "id": 9,
+              "ime": "Xavi",
+              "prezime": "Simons",
+              "pozicija": "Vezni",
+              "klub": "RB Leipzig"
+            },
+            {
+              "id": 32,
+              "ime": "Ko",
+              "prezime": "Itakura",
+              "pozicija": "Obrana",
+              "klub": "Borussia Mönchengladbach"
+            },
+            {
+              "id": 31,
+              "ime": "Luca",
+              "prezime": "Netz",
+              "pozicija": "Obrana",
+              "klub": "Borussia Mönchengladbach"
+            },
+            {
+              "id": 30,
+              "ime": "Joe",
+              "prezime": "Scally",
+              "pozicija": "Obrana",
+              "klub": "Borussia Mönchengladbach"
+            },
+            {
+              "id": 29,
+              "ime": "Julian",
+              "prezime": "Weigl",
+              "pozicija": "Vezni",
+              "klub": "Borussia Mönchengladbach"
+            }
+          ]
+        },
+        "examples": [
+          [
+            {
+              "id": 4,
+              "ime": "Alphonso",
+              "prezime": "Davies",
+              "pozicija": "Obrana",
+              "klub": "Bayern Munich"
+            },
+            {
+              "id": 3,
+              "ime": "Harry",
+              "prezime": "Kane",
+              "pozicija": "Napadač",
+              "klub": "Bayern Munich"
+            },
+            {
+              "id": 2,
+              "ime": "Manuel",
+              "prezime": "Neuer",
+              "pozicija": "Golman",
+              "klub": "Bayern Munich"
+            },
+            {
+              "id": 1,
+              "ime": "Thomas",
+              "prezime": "Müller",
+              "pozicija": "Napadač",
+              "klub": "Bayern Munich"
+            }
+          ],
+          [
+            {
+              "id": 24,
+              "ime": "Jonathan",
+              "prezime": "Tah",
+              "pozicija": "Obrana",
+              "klub": "Bayer Leverkusen"
+            },
+            {
+              "id": 23,
+              "ime": "Jeremie",
+              "prezime": "Frimpong",
+              "pozicija": "Obrana",
+              "klub": "Bayer Leverkusen"
+            },
+            {
+              "id": 22,
+              "ime": "Victor",
+              "prezime": "Boniface",
+              "pozicija": "Napadač",
+              "klub": "Bayer Leverkusen"
+            },
+            {
+              "id": 21,
+              "ime": "Florian",
+              "prezime": "Wirtz",
+              "pozicija": "Vezni",
+              "klub": "Bayer Leverkusen"
+            }
+          ],
+          [
+            {
+              "id": 20,
+              "ime": "Kamil",
+              "prezime": "Grabara",
+              "pozicija": "Golman",
+              "klub": "Wolfsburg"
+            },
+            {
+              "id": 19,
+              "ime": "Sebastiaan",
+              "prezime": "Bornauw",
+              "pozicija": "Obrana",
+              "klub": "Wolfsburg"
+            },
+            {
+              "id": 18,
+              "ime": "Maximilian",
+              "prezime": "Arnold",
+              "pozicija": "Vezni",
+              "klub": "Wolfsburg"
+            },
+            {
+              "id": 17,
+              "ime": "Jonas",
+              "prezime": "Wind",
+              "pozicija": "Napadač",
+              "klub": "Wolfsburg"
+            }
+          ],
+          [
+            {
+              "id": 56,
+              "ime": "Romano",
+              "prezime": "Schmid",
+              "pozicija": "Vezni",
+              "klub": "SV Werder Bremen"
+            },
+            {
+              "id": 55,
+              "ime": "Leonardo",
+              "prezime": "Bittencourt",
+              "pozicija": "Vezni",
+              "klub": "SV Werder Bremen"
+            },
+            {
+              "id": 54,
+              "ime": "Miloš",
+              "prezime": "Veljković",
+              "pozicija": "Obrana",
+              "klub": "SV Werder Bremen"
+            },
+            {
+              "id": 53,
+              "ime": "Michael",
+              "prezime": "Zetterer",
+              "pozicija": "Golman",
+              "klub": "SV Werder Bremen"
+            }
+          ],
+          [
+            {
+              "id": 16,
+              "ime": "Alexander",
+              "prezime": "Nübel",
+              "pozicija": "Golman",
+              "klub": "Stuttgart"
+            },
+            {
+              "id": 15,
+              "ime": "Jeff",
+              "prezime": "Chabot",
+              "pozicija": "Obrana",
+              "klub": "Stuttgart"
+            },
+            {
+              "id": 14,
+              "ime": "Enzo",
+              "prezime": "Millot",
+              "pozicija": "Vezni",
+              "klub": "Stuttgart"
+            },
+            {
+              "id": 13,
+              "ime": "Deniz",
+              "prezime": "Undav",
+              "pozicija": "Napadač",
+              "klub": "Stuttgart"
+            }
+          ],
+          [
+            {
+              "id": 44,
+              "ime": "Janik",
+              "prezime": "Haberer",
+              "pozicija": "Vezni",
+              "klub": "Union Berlin"
+            },
+            {
+              "id": 43,
+              "ime": "Frederik",
+              "prezime": "Rønnow",
+              "pozicija": "Golman",
+              "klub": "Union Berlin"
+            },
+            {
+              "id": 42,
+              "ime": "Lucas",
+              "prezime": "Tousart",
+              "pozicija": "Vezni",
+              "klub": "Union Berlin"
+            },
+            {
+              "id": 41,
+              "ime": "Diogo",
+              "prezime": "Leite",
+              "pozicija": "Obrana",
+              "klub": "Union Berlin"
+            }
+          ],
+          [
+            {
+              "id": 40,
+              "ime": "Jeffrey",
+              "prezime": "Gouweleeuw",
+              "pozicija": "Obrana",
+              "klub": "FC Augsburg"
+            },
+            {
+              "id": 39,
+              "ime": "Robert",
+              "prezime": "Gumny",
+              "pozicija": "Obrana",
+              "klub": "FC Augsburg"
+            },
+            {
+              "id": 38,
+              "ime": "Maximilian",
+              "prezime": "Bauer",
+              "pozicija": "Obrana",
+              "klub": "FC Augsburg"
+            },
+            {
+              "id": 37,
+              "ime": "Finn",
+              "prezime": "Dahmen",
+              "pozicija": "Golman",
+              "klub": "FC Augsburg"
+            }
+          ],
+          [
+            {
+              "id": 8,
+              "ime": "Emre",
+              "prezime": "Can",
+              "pozicija": "Vezni",
+              "klub": "Borussia Dortmund"
+            },
+            {
+              "id": 7,
+              "ime": "Gregor",
+              "prezime": "Kobel",
+              "pozicija": "Golman",
+              "klub": "Borussia Dortmund"
+            },
+            {
+              "id": 6,
+              "ime": "Yan",
+              "prezime": "Couto",
+              "pozicija": "Obrana",
+              "klub": "Borussia Dortmund"
+            },
+            {
+              "id": 5,
+              "ime": "Niklas",
+              "prezime": "Sule",
+              "pozicija": "Obrana",
+              "klub": "Borussia Dortmund"
+            }
+          ],
+          [
+            {
+              "id": 28,
+              "ime": "Robin",
+              "prezime": "Koch",
+              "pozicija": "Obrana",
+              "klub": "Eintracht Frankfurt"
+            },
+            {
+              "id": 27,
+              "ime": "Ansgar",
+              "prezime": "Knauff",
+              "pozicija": "Obrana",
+              "klub": "Eintracht Frankfurt"
+            },
+            {
+              "id": 26,
+              "ime": "Mario",
+              "prezime": "Götze",
+              "pozicija": "Vezni",
+              "klub": "Eintracht Frankfurt"
+            },
+            {
+              "id": 25,
+              "ime": "Omar",
+              "prezime": "Marmoush",
+              "pozicija": "Napadač",
+              "klub": "Eintracht Frankfurt"
+            }
+          ],
+          [
+            {
+              "id": 52,
+              "ime": "Dominik",
+              "prezime": "Kohr",
+              "pozicija": "Vezni",
+              "klub": "1. FSV Mainz 05"
+            },
+            {
+              "id": 51,
+              "ime": "Jonathan",
+              "prezime": "Burkardt",
+              "pozicija": "Napadač",
+              "klub": "1. FSV Mainz 05"
+            },
+            {
+              "id": 50,
+              "ime": "Jae-Sung",
+              "prezime": "Lee",
+              "pozicija": "Vezni",
+              "klub": "1. FSV Mainz 05"
+            },
+            {
+              "id": 49,
+              "ime": "Robin",
+              "prezime": "Zentner",
+              "pozicija": "Golman",
+              "klub": "1. FSV Mainz 05"
+            }
+          ],
+          [
+            {
+              "id": 48,
+              "ime": "Vincenzo",
+              "prezime": "Grifo",
+              "pozicija": "Napadač",
+              "klub": "SC Freiburg"
+            },
+            {
+              "id": 47,
+              "ime": "Ritsu",
+              "prezime": "Doan",
+              "pozicija": "Napadač",
+              "klub": "SC Freiburg"
+            },
+            {
+              "id": 46,
+              "ime": "Maximilian",
+              "prezime": "Eggestein",
+              "pozicija": "Vezni",
+              "klub": "SC Freiburg"
+            },
+            {
+              "id": 45,
+              "ime": "Matthias",
+              "prezime": "Ginter",
+              "pozicija": "Obrana",
+              "klub": "SC Freiburg"
+            }
+          ],
+          [
+            {
+              "id": 36,
+              "ime": "Dennis",
+              "prezime": "Geiger",
+              "pozicija": "Vezni",
+              "klub": "TSG Hoffenheim"
+            },
+            {
+              "id": 35,
+              "ime": "Ozan",
+              "prezime": "Kabak",
+              "pozicija": "Obrana",
+              "klub": "TSG Hoffenheim"
+            },
+            {
+              "id": 34,
+              "ime": "Oliver",
+              "prezime": "Baumann",
+              "pozicija": "Golman",
+              "klub": "TSG Hoffenheim"
+            },
+            {
+              "id": 33,
+              "ime": "Andrej",
+              "prezime": "Kramarić",
+              "pozicija": "Napadač",
+              "klub": "TSG Hoffenheim"
+            }
+          ],
+          [
+            {
+              "id": 12,
+              "ime": "Yussuf",
+              "prezime": "Poulsen",
+              "pozicija": "Napadač",
+              "klub": "RB Leipzig"
+            },
+            {
+              "id": 11,
+              "ime": "Lukas",
+              "prezime": "Klostermann",
+              "pozicija": "Obrana",
+              "klub": "RB Leipzig"
+            },
+            {
+              "id": 10,
+              "ime": "David",
+              "prezime": "Raum",
+              "pozicija": "Obrana",
+              "klub": "RB Leipzig"
+            },
+            {
+              "id": 9,
+              "ime": "Xavi",
+              "prezime": "Simons",
+              "pozicija": "Vezni",
+              "klub": "RB Leipzig"
+            }
+          ],
+          [
+            {
+              "id": 32,
+              "ime": "Ko",
+              "prezime": "Itakura",
+              "pozicija": "Obrana",
+              "klub": "Borussia Mönchengladbach"
+            },
+            {
+              "id": 31,
+              "ime": "Luca",
+              "prezime": "Netz",
+              "pozicija": "Obrana",
+              "klub": "Borussia Mönchengladbach"
+            },
+            {
+              "id": 30,
+              "ime": "Joe",
+              "prezime": "Scally",
+              "pozicija": "Obrana",
+              "klub": "Borussia Mönchengladbach"
+            },
+            {
+              "id": 29,
+              "ime": "Julian",
+              "prezime": "Weigl",
+              "pozicija": "Vezni",
+              "klub": "Borussia Mönchengladbach"
+            }
+          ]
+        ]
+      },
+      "broj_igraca": {
+        "type": "integer",
+        "title": "broj_igraca atribut",
+        "description": "Atribut broj_igraca je koliko sadrzi klub igraca",
+        "examples": [28, 25, 31, 27, 29, 33, 24, 26]
+      },
+      "prosjek_godina": {
+        "type": "number",
+        "title": "prosjek_godina atribut",
+        "description": "Atribut prosjek_godina je prosjek godina igrac",
+        "examples": [
+          26.5, 26.0, 25.4, 26.3, 24.2, 27.0, 25.8, 25.1, 25.0, 26.8, 26.7,
+          25.9, 25.6, 26.2
+        ]
+      },
+      "broj_bodova_prosle_godine": {
+        "type": "integer",
+        "title": "broj_bodova_prosle_godine atribut",
+        "description": "Atribut broj_bodova_prosle_godine je broj bodova koji je ostavario u ligi prosle godine",
+        "examples": [72, 90, 37, 42, 73, 33, 39, 65, 47, 35, 46, 63, 34]
+      },
+      "broj_ligi_prvaka": {
+        "type": "integer",
+        "title": "broj_ligi_prvaka atribut",
+        "description": "Atribut pbroj_ligi_prvaka  je broj ligi prvaka koje je osvojio klub",
+        "examples": [6, 0, 1]
+      },
+      "broj_kupova": {
+        "type": "integer",
+        "title": "broj_kupova atribut",
+        "description": "Atribut broj_kupova  je broj kupova koje je osvojio klub",
+        "examples": [20, 2, 1, 6, 3, 0, 5]
+      },
+      "tm_vrijednost": {
+        "type": "number",
+        "title": "tm_vrijednost atribut",
+        "description": "Atribut tm_vrijednost  je vrijenodst ekipe prema stranici TransferMarket",
+        "examples": [
+          939.7, 634.25, 215.0, 119.35, 313.73, 122.18, 99.33, 475.3, 280.1,
+          93.45, 165.05, 166.15, 517.9, 139.7
+        ]
+      }
+    },
+    "examples": [
+      {
+        "naziv": "Bayern Munich",
+        "grad": "Munich",
+        "godina_osnutka": 1900,
+        "stadion": {
+          "naziv": "Allianz Arena",
+          "kapacitet": 75024,
+          "godina_osnutka": 2005
+        },
+        "trener": {
+          "id": 1,
+          "ime": "Vincent",
+          "prezime": "Kompany"
+        },
+        "broj_trofeja_ligi": 33,
+        "igraci": [
+          {
+            "id": 4,
+            "ime": "Alphonso",
+            "prezime": "Davies",
+            "pozicija": "Obrana",
+            "klub": "Bayern Munich"
+          },
+          {
+            "id": 3,
+            "ime": "Harry",
+            "prezime": "Kane",
+            "pozicija": "Napadač",
+            "klub": "Bayern Munich"
+          },
+          {
+            "id": 2,
+            "ime": "Manuel",
+            "prezime": "Neuer",
+            "pozicija": "Golman",
+            "klub": "Bayern Munich"
+          },
+          {
+            "id": 1,
+            "ime": "Thomas",
+            "prezime": "Müller",
+            "pozicija": "Napadač",
+            "klub": "Bayern Munich"
+          }
+        ],
+        "broj_igraca": 28,
+        "prosjek_godina": 26.5,
+        "broj_bodova_prosle_godine": 72,
+        "broj_ligi_prvaka": 6,
+        "broj_kupova": 20,
+        "tm_vrijednost": 939.7
+      },
+      {
+        "naziv": "Bayer Leverkusen",
+        "grad": "Leverkusen",
+        "godina_osnutka": 1904,
+        "stadion": {
+          "naziv": "BayArena",
+          "kapacitet": 30210,
+          "godina_osnutka": 1958
+        },
+        "trener": {
+          "id": 6,
+          "ime": "Xabi",
+          "prezime": "Alonso"
+        },
+        "broj_trofeja_ligi": 1,
+        "igraci": [
+          {
+            "id": 24,
+            "ime": "Jonathan",
+            "prezime": "Tah",
+            "pozicija": "Obrana",
+            "klub": "Bayer Leverkusen"
+          },
+          {
+            "id": 23,
+            "ime": "Jeremie",
+            "prezime": "Frimpong",
+            "pozicija": "Obrana",
+            "klub": "Bayer Leverkusen"
+          },
+          {
+            "id": 22,
+            "ime": "Victor",
+            "prezime": "Boniface",
+            "pozicija": "Napadač",
+            "klub": "Bayer Leverkusen"
+          },
+          {
+            "id": 21,
+            "ime": "Florian",
+            "prezime": "Wirtz",
+            "pozicija": "Vezni",
+            "klub": "Bayer Leverkusen"
+          }
+        ],
+        "broj_igraca": 25,
+        "prosjek_godina": 26.0,
+        "broj_bodova_prosle_godine": 90,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 2,
+        "tm_vrijednost": 634.25
+      },
+      {
+        "naziv": "Wolfsburg",
+        "grad": "Wolfsburg",
+        "godina_osnutka": 1945,
+        "stadion": {
+          "naziv": "Volkswagen Arena",
+          "kapacitet": 30000,
+          "godina_osnutka": 2002
+        },
+        "trener": {
+          "id": 5,
+          "ime": "Ralph",
+          "prezime": "Hasenhüttl"
+        },
+        "broj_trofeja_ligi": 1,
+        "igraci": [
+          {
+            "id": 20,
+            "ime": "Kamil",
+            "prezime": "Grabara",
+            "pozicija": "Golman",
+            "klub": "Wolfsburg"
+          },
+          {
+            "id": 19,
+            "ime": "Sebastiaan",
+            "prezime": "Bornauw",
+            "pozicija": "Obrana",
+            "klub": "Wolfsburg"
+          },
+          {
+            "id": 18,
+            "ime": "Maximilian",
+            "prezime": "Arnold",
+            "pozicija": "Vezni",
+            "klub": "Wolfsburg"
+          },
+          {
+            "id": 17,
+            "ime": "Jonas",
+            "prezime": "Wind",
+            "pozicija": "Napadač",
+            "klub": "Wolfsburg"
+          }
+        ],
+        "broj_igraca": 31,
+        "prosjek_godina": 25.4,
+        "broj_bodova_prosle_godine": 37,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 1,
+        "tm_vrijednost": 215.0
+      },
+      {
+        "naziv": "SV Werder Bremen",
+        "grad": "Bremen",
+        "godina_osnutka": 1899,
+        "stadion": {
+          "naziv": "Wohninvest Weserstadion",
+          "kapacitet": 42100,
+          "godina_osnutka": 1909
+        },
+        "trener": {
+          "id": 14,
+          "ime": "Ole",
+          "prezime": "Werner"
+        },
+        "broj_trofeja_ligi": 4,
+        "igraci": [
+          {
+            "id": 56,
+            "ime": "Romano",
+            "prezime": "Schmid",
+            "pozicija": "Vezni",
+            "klub": "SV Werder Bremen"
+          },
+          {
+            "id": 55,
+            "ime": "Leonardo",
+            "prezime": "Bittencourt",
+            "pozicija": "Vezni",
+            "klub": "SV Werder Bremen"
+          },
+          {
+            "id": 54,
+            "ime": "Miloš",
+            "prezime": "Veljković",
+            "pozicija": "Obrana",
+            "klub": "SV Werder Bremen"
+          },
+          {
+            "id": 53,
+            "ime": "Michael",
+            "prezime": "Zetterer",
+            "pozicija": "Golman",
+            "klub": "SV Werder Bremen"
+          }
+        ],
+        "broj_igraca": 27,
+        "prosjek_godina": 26.3,
+        "broj_bodova_prosle_godine": 42,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 6,
+        "tm_vrijednost": 119.35
+      },
+      {
+        "naziv": "Stuttgart",
+        "grad": "Stuttgart",
+        "godina_osnutka": 1893,
+        "stadion": {
+          "naziv": "Mercedes-Benz Arena",
+          "kapacitet": 60441,
+          "godina_osnutka": 1933
+        },
+        "trener": {
+          "id": 4,
+          "ime": "Sebastian",
+          "prezime": "Hoeneß"
+        },
+        "broj_trofeja_ligi": 5,
+        "igraci": [
+          {
+            "id": 16,
+            "ime": "Alexander",
+            "prezime": "Nübel",
+            "pozicija": "Golman",
+            "klub": "Stuttgart"
+          },
+          {
+            "id": 15,
+            "ime": "Jeff",
+            "prezime": "Chabot",
+            "pozicija": "Obrana",
+            "klub": "Stuttgart"
+          },
+          {
+            "id": 14,
+            "ime": "Enzo",
+            "prezime": "Millot",
+            "pozicija": "Vezni",
+            "klub": "Stuttgart"
+          },
+          {
+            "id": 13,
+            "ime": "Deniz",
+            "prezime": "Undav",
+            "pozicija": "Napadač",
+            "klub": "Stuttgart"
+          }
+        ],
+        "broj_igraca": 31,
+        "prosjek_godina": 24.2,
+        "broj_bodova_prosle_godine": 73,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 3,
+        "tm_vrijednost": 313.73
+      },
+      {
+        "naziv": "Union Berlin",
+        "grad": "Berlin",
+        "godina_osnutka": 1966,
+        "stadion": {
+          "naziv": "Stadion An der Alten Försterei",
+          "kapacitet": 22012,
+          "godina_osnutka": 1920
+        },
+        "trener": {
+          "id": 11,
+          "ime": "Bo",
+          "prezime": "Svensson"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 44,
+            "ime": "Janik",
+            "prezime": "Haberer",
+            "pozicija": "Vezni",
+            "klub": "Union Berlin"
+          },
+          {
+            "id": 43,
+            "ime": "Frederik",
+            "prezime": "Rønnow",
+            "pozicija": "Golman",
+            "klub": "Union Berlin"
+          },
+          {
+            "id": 42,
+            "ime": "Lucas",
+            "prezime": "Tousart",
+            "pozicija": "Vezni",
+            "klub": "Union Berlin"
+          },
+          {
+            "id": 41,
+            "ime": "Diogo",
+            "prezime": "Leite",
+            "pozicija": "Obrana",
+            "klub": "Union Berlin"
+          }
+        ],
+        "broj_igraca": 29,
+        "prosjek_godina": 27.0,
+        "broj_bodova_prosle_godine": 33,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 122.18
+      },
+      {
+        "naziv": "FC Augsburg",
+        "grad": "Augsburg",
+        "godina_osnutka": 1907,
+        "stadion": {
+          "naziv": "WWK Arena",
+          "kapacitet": 30660,
+          "godina_osnutka": 2009
+        },
+        "trener": {
+          "id": 10,
+          "ime": "Jess",
+          "prezime": "Thorup"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 40,
+            "ime": "Jeffrey",
+            "prezime": "Gouweleeuw",
+            "pozicija": "Obrana",
+            "klub": "FC Augsburg"
+          },
+          {
+            "id": 39,
+            "ime": "Robert",
+            "prezime": "Gumny",
+            "pozicija": "Obrana",
+            "klub": "FC Augsburg"
+          },
+          {
+            "id": 38,
+            "ime": "Maximilian",
+            "prezime": "Bauer",
+            "pozicija": "Obrana",
+            "klub": "FC Augsburg"
+          },
+          {
+            "id": 37,
+            "ime": "Finn",
+            "prezime": "Dahmen",
+            "pozicija": "Golman",
+            "klub": "FC Augsburg"
+          }
+        ],
+        "broj_igraca": 29,
+        "prosjek_godina": 25.8,
+        "broj_bodova_prosle_godine": 39,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 99.33
+      },
+      {
+        "naziv": "Borussia Dortmund",
+        "grad": "Dortmund",
+        "godina_osnutka": 1909,
+        "stadion": {
+          "naziv": "Signal Iduna Park",
+          "kapacitet": 81365,
+          "godina_osnutka": 1974
+        },
+        "trener": {
+          "id": 2,
+          "ime": "Nuri",
+          "prezime": "Sahin"
+        },
+        "broj_trofeja_ligi": 8,
+        "igraci": [
+          {
+            "id": 8,
+            "ime": "Emre",
+            "prezime": "Can",
+            "pozicija": "Vezni",
+            "klub": "Borussia Dortmund"
+          },
+          {
+            "id": 7,
+            "ime": "Gregor",
+            "prezime": "Kobel",
+            "pozicija": "Golman",
+            "klub": "Borussia Dortmund"
+          },
+          {
+            "id": 6,
+            "ime": "Yan",
+            "prezime": "Couto",
+            "pozicija": "Obrana",
+            "klub": "Borussia Dortmund"
+          },
+          {
+            "id": 5,
+            "ime": "Niklas",
+            "prezime": "Sule",
+            "pozicija": "Obrana",
+            "klub": "Borussia Dortmund"
+          }
+        ],
+        "broj_igraca": 25,
+        "prosjek_godina": 25.1,
+        "broj_bodova_prosle_godine": 65,
+        "broj_ligi_prvaka": 1,
+        "broj_kupova": 5,
+        "tm_vrijednost": 475.3
+      },
+      {
+        "naziv": "Eintracht Frankfurt",
+        "grad": "Frankfurt",
+        "godina_osnutka": 1899,
+        "stadion": {
+          "naziv": "Deutsche Bank Park",
+          "kapacitet": 51500,
+          "godina_osnutka": 1925
+        },
+        "trener": {
+          "id": 7,
+          "ime": "Dino",
+          "prezime": "Toppmöller"
+        },
+        "broj_trofeja_ligi": 1,
+        "igraci": [
+          {
+            "id": 28,
+            "ime": "Robin",
+            "prezime": "Koch",
+            "pozicija": "Obrana",
+            "klub": "Eintracht Frankfurt"
+          },
+          {
+            "id": 27,
+            "ime": "Ansgar",
+            "prezime": "Knauff",
+            "pozicija": "Obrana",
+            "klub": "Eintracht Frankfurt"
+          },
+          {
+            "id": 26,
+            "ime": "Mario",
+            "prezime": "Götze",
+            "pozicija": "Vezni",
+            "klub": "Eintracht Frankfurt"
+          },
+          {
+            "id": 25,
+            "ime": "Omar",
+            "prezime": "Marmoush",
+            "pozicija": "Napadač",
+            "klub": "Eintracht Frankfurt"
+          }
+        ],
+        "broj_igraca": 27,
+        "prosjek_godina": 25.0,
+        "broj_bodova_prosle_godine": 47,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 5,
+        "tm_vrijednost": 280.1
+      },
+      {
+        "naziv": "1. FSV Mainz 05",
+        "grad": "Mainz",
+        "godina_osnutka": 1905,
+        "stadion": {
+          "naziv": "Mewa Arena",
+          "kapacitet": 34000,
+          "godina_osnutka": 2011
+        },
+        "trener": {
+          "id": 13,
+          "ime": "Bo",
+          "prezime": "Henriksen"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 52,
+            "ime": "Dominik",
+            "prezime": "Kohr",
+            "pozicija": "Vezni",
+            "klub": "1. FSV Mainz 05"
+          },
+          {
+            "id": 51,
+            "ime": "Jonathan",
+            "prezime": "Burkardt",
+            "pozicija": "Napadač",
+            "klub": "1. FSV Mainz 05"
+          },
+          {
+            "id": 50,
+            "ime": "Jae-Sung",
+            "prezime": "Lee",
+            "pozicija": "Vezni",
+            "klub": "1. FSV Mainz 05"
+          },
+          {
+            "id": 49,
+            "ime": "Robin",
+            "prezime": "Zentner",
+            "pozicija": "Golman",
+            "klub": "1. FSV Mainz 05"
+          }
+        ],
+        "broj_igraca": 25,
+        "prosjek_godina": 26.8,
+        "broj_bodova_prosle_godine": 35,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 93.45
+      },
+      {
+        "naziv": "SC Freiburg",
+        "grad": "Freiburg",
+        "godina_osnutka": 1904,
+        "stadion": {
+          "naziv": "Europa-Park Stadion",
+          "kapacitet": 34700,
+          "godina_osnutka": 2021
+        },
+        "trener": {
+          "id": 12,
+          "ime": "Julian",
+          "prezime": "Schuster"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 48,
+            "ime": "Vincenzo",
+            "prezime": "Grifo",
+            "pozicija": "Napadač",
+            "klub": "SC Freiburg"
+          },
+          {
+            "id": 47,
+            "ime": "Ritsu",
+            "prezime": "Doan",
+            "pozicija": "Napadač",
+            "klub": "SC Freiburg"
+          },
+          {
+            "id": 46,
+            "ime": "Maximilian",
+            "prezime": "Eggestein",
+            "pozicija": "Vezni",
+            "klub": "SC Freiburg"
+          },
+          {
+            "id": 45,
+            "ime": "Matthias",
+            "prezime": "Ginter",
+            "pozicija": "Obrana",
+            "klub": "SC Freiburg"
+          }
+        ],
+        "broj_igraca": 28,
+        "prosjek_godina": 26.7,
+        "broj_bodova_prosle_godine": 42,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 165.05
+      },
+      {
+        "naziv": "TSG Hoffenheim",
+        "grad": "Sinsheim",
+        "godina_osnutka": 1899,
+        "stadion": {
+          "naziv": "PreZero Arena",
+          "kapacitet": 30150,
+          "godina_osnutka": 2009
+        },
+        "trener": {
+          "id": 9,
+          "ime": "Pellegrino",
+          "prezime": "Matarazzo"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 36,
+            "ime": "Dennis",
+            "prezime": "Geiger",
+            "pozicija": "Vezni",
+            "klub": "TSG Hoffenheim"
+          },
+          {
+            "id": 35,
+            "ime": "Ozan",
+            "prezime": "Kabak",
+            "pozicija": "Obrana",
+            "klub": "TSG Hoffenheim"
+          },
+          {
+            "id": 34,
+            "ime": "Oliver",
+            "prezime": "Baumann",
+            "pozicija": "Golman",
+            "klub": "TSG Hoffenheim"
+          },
+          {
+            "id": 33,
+            "ime": "Andrej",
+            "prezime": "Kramarić",
+            "pozicija": "Napadač",
+            "klub": "TSG Hoffenheim"
+          }
+        ],
+        "broj_igraca": 33,
+        "prosjek_godina": 25.9,
+        "broj_bodova_prosle_godine": 46,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 166.15
+      },
+      {
+        "naziv": "RB Leipzig",
+        "grad": "Leipzig",
+        "godina_osnutka": 2009,
+        "stadion": {
+          "naziv": "Red Bull Arena",
+          "kapacitet": 47800,
+          "godina_osnutka": 2010
+        },
+        "trener": {
+          "id": 3,
+          "ime": "Marco",
+          "prezime": "Rose"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 12,
+            "ime": "Yussuf",
+            "prezime": "Poulsen",
+            "pozicija": "Napadač",
+            "klub": "RB Leipzig"
+          },
+          {
+            "id": 11,
+            "ime": "Lukas",
+            "prezime": "Klostermann",
+            "pozicija": "Obrana",
+            "klub": "RB Leipzig"
+          },
+          {
+            "id": 10,
+            "ime": "David",
+            "prezime": "Raum",
+            "pozicija": "Obrana",
+            "klub": "RB Leipzig"
+          },
+          {
+            "id": 9,
+            "ime": "Xavi",
+            "prezime": "Simons",
+            "pozicija": "Vezni",
+            "klub": "RB Leipzig"
+          }
+        ],
+        "broj_igraca": 24,
+        "prosjek_godina": 25.6,
+        "broj_bodova_prosle_godine": 63,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 2,
+        "tm_vrijednost": 517.9
+      },
+      {
+        "naziv": "Borussia Mönchengladbach",
+        "grad": "Mönchengladbach",
+        "godina_osnutka": 1900,
+        "stadion": {
+          "naziv": "Borussia-Park",
+          "kapacitet": 54057,
+          "godina_osnutka": 2004
+        },
+        "trener": {
+          "id": 8,
+          "ime": "Gerardo",
+          "prezime": "Seoane"
+        },
+        "broj_trofeja_ligi": 5,
+        "igraci": [
+          {
+            "id": 32,
+            "ime": "Ko",
+            "prezime": "Itakura",
+            "pozicija": "Obrana",
+            "klub": "Borussia Mönchengladbach"
+          },
+          {
+            "id": 31,
+            "ime": "Luca",
+            "prezime": "Netz",
+            "pozicija": "Obrana",
+            "klub": "Borussia Mönchengladbach"
+          },
+          {
+            "id": 30,
+            "ime": "Joe",
+            "prezime": "Scally",
+            "pozicija": "Obrana",
+            "klub": "Borussia Mönchengladbach"
+          },
+          {
+            "id": 29,
+            "ime": "Julian",
+            "prezime": "Weigl",
+            "pozicija": "Vezni",
+            "klub": "Borussia Mönchengladbach"
+          }
+        ],
+        "broj_igraca": 26,
+        "prosjek_godina": 26.2,
+        "broj_bodova_prosle_godine": 34,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 3,
+        "tm_vrijednost": 139.7
+      }
+    ]
+  },
+  "examples": [
+    [
+      {
+        "naziv": "Bayern Munich",
+        "grad": "Munich",
+        "godina_osnutka": 1900,
+        "stadion": {
+          "naziv": "Allianz Arena",
+          "kapacitet": 75024,
+          "godina_osnutka": 2005
+        },
+        "trener": {
+          "id": 1,
+          "ime": "Vincent",
+          "prezime": "Kompany"
+        },
+        "broj_trofeja_ligi": 33,
+        "igraci": [
+          {
+            "id": 4,
+            "ime": "Alphonso",
+            "prezime": "Davies",
+            "pozicija": "Obrana",
+            "klub": "Bayern Munich"
+          },
+          {
+            "id": 3,
+            "ime": "Harry",
+            "prezime": "Kane",
+            "pozicija": "Napadač",
+            "klub": "Bayern Munich"
+          },
+          {
+            "id": 2,
+            "ime": "Manuel",
+            "prezime": "Neuer",
+            "pozicija": "Golman",
+            "klub": "Bayern Munich"
+          },
+          {
+            "id": 1,
+            "ime": "Thomas",
+            "prezime": "Müller",
+            "pozicija": "Napadač",
+            "klub": "Bayern Munich"
+          }
+        ],
+        "broj_igraca": 28,
+        "prosjek_godina": 26.5,
+        "broj_bodova_prosle_godine": 72,
+        "broj_ligi_prvaka": 6,
+        "broj_kupova": 20,
+        "tm_vrijednost": 939.7
+      },
+      {
+        "naziv": "Bayer Leverkusen",
+        "grad": "Leverkusen",
+        "godina_osnutka": 1904,
+        "stadion": {
+          "naziv": "BayArena",
+          "kapacitet": 30210,
+          "godina_osnutka": 1958
+        },
+        "trener": {
+          "id": 6,
+          "ime": "Xabi",
+          "prezime": "Alonso"
+        },
+        "broj_trofeja_ligi": 1,
+        "igraci": [
+          {
+            "id": 24,
+            "ime": "Jonathan",
+            "prezime": "Tah",
+            "pozicija": "Obrana",
+            "klub": "Bayer Leverkusen"
+          },
+          {
+            "id": 23,
+            "ime": "Jeremie",
+            "prezime": "Frimpong",
+            "pozicija": "Obrana",
+            "klub": "Bayer Leverkusen"
+          },
+          {
+            "id": 22,
+            "ime": "Victor",
+            "prezime": "Boniface",
+            "pozicija": "Napadač",
+            "klub": "Bayer Leverkusen"
+          },
+          {
+            "id": 21,
+            "ime": "Florian",
+            "prezime": "Wirtz",
+            "pozicija": "Vezni",
+            "klub": "Bayer Leverkusen"
+          }
+        ],
+        "broj_igraca": 25,
+        "prosjek_godina": 26.0,
+        "broj_bodova_prosle_godine": 90,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 2,
+        "tm_vrijednost": 634.25
+      },
+      {
+        "naziv": "Wolfsburg",
+        "grad": "Wolfsburg",
+        "godina_osnutka": 1945,
+        "stadion": {
+          "naziv": "Volkswagen Arena",
+          "kapacitet": 30000,
+          "godina_osnutka": 2002
+        },
+        "trener": {
+          "id": 5,
+          "ime": "Ralph",
+          "prezime": "Hasenhüttl"
+        },
+        "broj_trofeja_ligi": 1,
+        "igraci": [
+          {
+            "id": 20,
+            "ime": "Kamil",
+            "prezime": "Grabara",
+            "pozicija": "Golman",
+            "klub": "Wolfsburg"
+          },
+          {
+            "id": 19,
+            "ime": "Sebastiaan",
+            "prezime": "Bornauw",
+            "pozicija": "Obrana",
+            "klub": "Wolfsburg"
+          },
+          {
+            "id": 18,
+            "ime": "Maximilian",
+            "prezime": "Arnold",
+            "pozicija": "Vezni",
+            "klub": "Wolfsburg"
+          },
+          {
+            "id": 17,
+            "ime": "Jonas",
+            "prezime": "Wind",
+            "pozicija": "Napadač",
+            "klub": "Wolfsburg"
+          }
+        ],
+        "broj_igraca": 31,
+        "prosjek_godina": 25.4,
+        "broj_bodova_prosle_godine": 37,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 1,
+        "tm_vrijednost": 215.0
+      },
+      {
+        "naziv": "SV Werder Bremen",
+        "grad": "Bremen",
+        "godina_osnutka": 1899,
+        "stadion": {
+          "naziv": "Wohninvest Weserstadion",
+          "kapacitet": 42100,
+          "godina_osnutka": 1909
+        },
+        "trener": {
+          "id": 14,
+          "ime": "Ole",
+          "prezime": "Werner"
+        },
+        "broj_trofeja_ligi": 4,
+        "igraci": [
+          {
+            "id": 56,
+            "ime": "Romano",
+            "prezime": "Schmid",
+            "pozicija": "Vezni",
+            "klub": "SV Werder Bremen"
+          },
+          {
+            "id": 55,
+            "ime": "Leonardo",
+            "prezime": "Bittencourt",
+            "pozicija": "Vezni",
+            "klub": "SV Werder Bremen"
+          },
+          {
+            "id": 54,
+            "ime": "Miloš",
+            "prezime": "Veljković",
+            "pozicija": "Obrana",
+            "klub": "SV Werder Bremen"
+          },
+          {
+            "id": 53,
+            "ime": "Michael",
+            "prezime": "Zetterer",
+            "pozicija": "Golman",
+            "klub": "SV Werder Bremen"
+          }
+        ],
+        "broj_igraca": 27,
+        "prosjek_godina": 26.3,
+        "broj_bodova_prosle_godine": 42,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 6,
+        "tm_vrijednost": 119.35
+      },
+      {
+        "naziv": "Stuttgart",
+        "grad": "Stuttgart",
+        "godina_osnutka": 1893,
+        "stadion": {
+          "naziv": "Mercedes-Benz Arena",
+          "kapacitet": 60441,
+          "godina_osnutka": 1933
+        },
+        "trener": {
+          "id": 4,
+          "ime": "Sebastian",
+          "prezime": "Hoeneß"
+        },
+        "broj_trofeja_ligi": 5,
+        "igraci": [
+          {
+            "id": 16,
+            "ime": "Alexander",
+            "prezime": "Nübel",
+            "pozicija": "Golman",
+            "klub": "Stuttgart"
+          },
+          {
+            "id": 15,
+            "ime": "Jeff",
+            "prezime": "Chabot",
+            "pozicija": "Obrana",
+            "klub": "Stuttgart"
+          },
+          {
+            "id": 14,
+            "ime": "Enzo",
+            "prezime": "Millot",
+            "pozicija": "Vezni",
+            "klub": "Stuttgart"
+          },
+          {
+            "id": 13,
+            "ime": "Deniz",
+            "prezime": "Undav",
+            "pozicija": "Napadač",
+            "klub": "Stuttgart"
+          }
+        ],
+        "broj_igraca": 31,
+        "prosjek_godina": 24.2,
+        "broj_bodova_prosle_godine": 73,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 3,
+        "tm_vrijednost": 313.73
+      },
+      {
+        "naziv": "Union Berlin",
+        "grad": "Berlin",
+        "godina_osnutka": 1966,
+        "stadion": {
+          "naziv": "Stadion An der Alten Försterei",
+          "kapacitet": 22012,
+          "godina_osnutka": 1920
+        },
+        "trener": {
+          "id": 11,
+          "ime": "Bo",
+          "prezime": "Svensson"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 44,
+            "ime": "Janik",
+            "prezime": "Haberer",
+            "pozicija": "Vezni",
+            "klub": "Union Berlin"
+          },
+          {
+            "id": 43,
+            "ime": "Frederik",
+            "prezime": "Rønnow",
+            "pozicija": "Golman",
+            "klub": "Union Berlin"
+          },
+          {
+            "id": 42,
+            "ime": "Lucas",
+            "prezime": "Tousart",
+            "pozicija": "Vezni",
+            "klub": "Union Berlin"
+          },
+          {
+            "id": 41,
+            "ime": "Diogo",
+            "prezime": "Leite",
+            "pozicija": "Obrana",
+            "klub": "Union Berlin"
+          }
+        ],
+        "broj_igraca": 29,
+        "prosjek_godina": 27.0,
+        "broj_bodova_prosle_godine": 33,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 122.18
+      },
+      {
+        "naziv": "FC Augsburg",
+        "grad": "Augsburg",
+        "godina_osnutka": 1907,
+        "stadion": {
+          "naziv": "WWK Arena",
+          "kapacitet": 30660,
+          "godina_osnutka": 2009
+        },
+        "trener": {
+          "id": 10,
+          "ime": "Jess",
+          "prezime": "Thorup"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 40,
+            "ime": "Jeffrey",
+            "prezime": "Gouweleeuw",
+            "pozicija": "Obrana",
+            "klub": "FC Augsburg"
+          },
+          {
+            "id": 39,
+            "ime": "Robert",
+            "prezime": "Gumny",
+            "pozicija": "Obrana",
+            "klub": "FC Augsburg"
+          },
+          {
+            "id": 38,
+            "ime": "Maximilian",
+            "prezime": "Bauer",
+            "pozicija": "Obrana",
+            "klub": "FC Augsburg"
+          },
+          {
+            "id": 37,
+            "ime": "Finn",
+            "prezime": "Dahmen",
+            "pozicija": "Golman",
+            "klub": "FC Augsburg"
+          }
+        ],
+        "broj_igraca": 29,
+        "prosjek_godina": 25.8,
+        "broj_bodova_prosle_godine": 39,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 99.33
+      },
+      {
+        "naziv": "Borussia Dortmund",
+        "grad": "Dortmund",
+        "godina_osnutka": 1909,
+        "stadion": {
+          "naziv": "Signal Iduna Park",
+          "kapacitet": 81365,
+          "godina_osnutka": 1974
+        },
+        "trener": {
+          "id": 2,
+          "ime": "Nuri",
+          "prezime": "Sahin"
+        },
+        "broj_trofeja_ligi": 8,
+        "igraci": [
+          {
+            "id": 8,
+            "ime": "Emre",
+            "prezime": "Can",
+            "pozicija": "Vezni",
+            "klub": "Borussia Dortmund"
+          },
+          {
+            "id": 7,
+            "ime": "Gregor",
+            "prezime": "Kobel",
+            "pozicija": "Golman",
+            "klub": "Borussia Dortmund"
+          },
+          {
+            "id": 6,
+            "ime": "Yan",
+            "prezime": "Couto",
+            "pozicija": "Obrana",
+            "klub": "Borussia Dortmund"
+          },
+          {
+            "id": 5,
+            "ime": "Niklas",
+            "prezime": "Sule",
+            "pozicija": "Obrana",
+            "klub": "Borussia Dortmund"
+          }
+        ],
+        "broj_igraca": 25,
+        "prosjek_godina": 25.1,
+        "broj_bodova_prosle_godine": 65,
+        "broj_ligi_prvaka": 1,
+        "broj_kupova": 5,
+        "tm_vrijednost": 475.3
+      },
+      {
+        "naziv": "Eintracht Frankfurt",
+        "grad": "Frankfurt",
+        "godina_osnutka": 1899,
+        "stadion": {
+          "naziv": "Deutsche Bank Park",
+          "kapacitet": 51500,
+          "godina_osnutka": 1925
+        },
+        "trener": {
+          "id": 7,
+          "ime": "Dino",
+          "prezime": "Toppmöller"
+        },
+        "broj_trofeja_ligi": 1,
+        "igraci": [
+          {
+            "id": 28,
+            "ime": "Robin",
+            "prezime": "Koch",
+            "pozicija": "Obrana",
+            "klub": "Eintracht Frankfurt"
+          },
+          {
+            "id": 27,
+            "ime": "Ansgar",
+            "prezime": "Knauff",
+            "pozicija": "Obrana",
+            "klub": "Eintracht Frankfurt"
+          },
+          {
+            "id": 26,
+            "ime": "Mario",
+            "prezime": "Götze",
+            "pozicija": "Vezni",
+            "klub": "Eintracht Frankfurt"
+          },
+          {
+            "id": 25,
+            "ime": "Omar",
+            "prezime": "Marmoush",
+            "pozicija": "Napadač",
+            "klub": "Eintracht Frankfurt"
+          }
+        ],
+        "broj_igraca": 27,
+        "prosjek_godina": 25.0,
+        "broj_bodova_prosle_godine": 47,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 5,
+        "tm_vrijednost": 280.1
+      },
+      {
+        "naziv": "1. FSV Mainz 05",
+        "grad": "Mainz",
+        "godina_osnutka": 1905,
+        "stadion": {
+          "naziv": "Mewa Arena",
+          "kapacitet": 34000,
+          "godina_osnutka": 2011
+        },
+        "trener": {
+          "id": 13,
+          "ime": "Bo",
+          "prezime": "Henriksen"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 52,
+            "ime": "Dominik",
+            "prezime": "Kohr",
+            "pozicija": "Vezni",
+            "klub": "1. FSV Mainz 05"
+          },
+          {
+            "id": 51,
+            "ime": "Jonathan",
+            "prezime": "Burkardt",
+            "pozicija": "Napadač",
+            "klub": "1. FSV Mainz 05"
+          },
+          {
+            "id": 50,
+            "ime": "Jae-Sung",
+            "prezime": "Lee",
+            "pozicija": "Vezni",
+            "klub": "1. FSV Mainz 05"
+          },
+          {
+            "id": 49,
+            "ime": "Robin",
+            "prezime": "Zentner",
+            "pozicija": "Golman",
+            "klub": "1. FSV Mainz 05"
+          }
+        ],
+        "broj_igraca": 25,
+        "prosjek_godina": 26.8,
+        "broj_bodova_prosle_godine": 35,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 93.45
+      },
+      {
+        "naziv": "SC Freiburg",
+        "grad": "Freiburg",
+        "godina_osnutka": 1904,
+        "stadion": {
+          "naziv": "Europa-Park Stadion",
+          "kapacitet": 34700,
+          "godina_osnutka": 2021
+        },
+        "trener": {
+          "id": 12,
+          "ime": "Julian",
+          "prezime": "Schuster"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 48,
+            "ime": "Vincenzo",
+            "prezime": "Grifo",
+            "pozicija": "Napadač",
+            "klub": "SC Freiburg"
+          },
+          {
+            "id": 47,
+            "ime": "Ritsu",
+            "prezime": "Doan",
+            "pozicija": "Napadač",
+            "klub": "SC Freiburg"
+          },
+          {
+            "id": 46,
+            "ime": "Maximilian",
+            "prezime": "Eggestein",
+            "pozicija": "Vezni",
+            "klub": "SC Freiburg"
+          },
+          {
+            "id": 45,
+            "ime": "Matthias",
+            "prezime": "Ginter",
+            "pozicija": "Obrana",
+            "klub": "SC Freiburg"
+          }
+        ],
+        "broj_igraca": 28,
+        "prosjek_godina": 26.7,
+        "broj_bodova_prosle_godine": 42,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 165.05
+      },
+      {
+        "naziv": "TSG Hoffenheim",
+        "grad": "Sinsheim",
+        "godina_osnutka": 1899,
+        "stadion": {
+          "naziv": "PreZero Arena",
+          "kapacitet": 30150,
+          "godina_osnutka": 2009
+        },
+        "trener": {
+          "id": 9,
+          "ime": "Pellegrino",
+          "prezime": "Matarazzo"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 36,
+            "ime": "Dennis",
+            "prezime": "Geiger",
+            "pozicija": "Vezni",
+            "klub": "TSG Hoffenheim"
+          },
+          {
+            "id": 35,
+            "ime": "Ozan",
+            "prezime": "Kabak",
+            "pozicija": "Obrana",
+            "klub": "TSG Hoffenheim"
+          },
+          {
+            "id": 34,
+            "ime": "Oliver",
+            "prezime": "Baumann",
+            "pozicija": "Golman",
+            "klub": "TSG Hoffenheim"
+          },
+          {
+            "id": 33,
+            "ime": "Andrej",
+            "prezime": "Kramarić",
+            "pozicija": "Napadač",
+            "klub": "TSG Hoffenheim"
+          }
+        ],
+        "broj_igraca": 33,
+        "prosjek_godina": 25.9,
+        "broj_bodova_prosle_godine": 46,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 0,
+        "tm_vrijednost": 166.15
+      },
+      {
+        "naziv": "RB Leipzig",
+        "grad": "Leipzig",
+        "godina_osnutka": 2009,
+        "stadion": {
+          "naziv": "Red Bull Arena",
+          "kapacitet": 47800,
+          "godina_osnutka": 2010
+        },
+        "trener": {
+          "id": 3,
+          "ime": "Marco",
+          "prezime": "Rose"
+        },
+        "broj_trofeja_ligi": 0,
+        "igraci": [
+          {
+            "id": 12,
+            "ime": "Yussuf",
+            "prezime": "Poulsen",
+            "pozicija": "Napadač",
+            "klub": "RB Leipzig"
+          },
+          {
+            "id": 11,
+            "ime": "Lukas",
+            "prezime": "Klostermann",
+            "pozicija": "Obrana",
+            "klub": "RB Leipzig"
+          },
+          {
+            "id": 10,
+            "ime": "David",
+            "prezime": "Raum",
+            "pozicija": "Obrana",
+            "klub": "RB Leipzig"
+          },
+          {
+            "id": 9,
+            "ime": "Xavi",
+            "prezime": "Simons",
+            "pozicija": "Vezni",
+            "klub": "RB Leipzig"
+          }
+        ],
+        "broj_igraca": 24,
+        "prosjek_godina": 25.6,
+        "broj_bodova_prosle_godine": 63,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 2,
+        "tm_vrijednost": 517.9
+      },
+      {
+        "naziv": "Borussia Mönchengladbach",
+        "grad": "Mönchengladbach",
+        "godina_osnutka": 1900,
+        "stadion": {
+          "naziv": "Borussia-Park",
+          "kapacitet": 54057,
+          "godina_osnutka": 2004
+        },
+        "trener": {
+          "id": 8,
+          "ime": "Gerardo",
+          "prezime": "Seoane"
+        },
+        "broj_trofeja_ligi": 5,
+        "igraci": [
+          {
+            "id": 32,
+            "ime": "Ko",
+            "prezime": "Itakura",
+            "pozicija": "Obrana",
+            "klub": "Borussia Mönchengladbach"
+          },
+          {
+            "id": 31,
+            "ime": "Luca",
+            "prezime": "Netz",
+            "pozicija": "Obrana",
+            "klub": "Borussia Mönchengladbach"
+          },
+          {
+            "id": 30,
+            "ime": "Joe",
+            "prezime": "Scally",
+            "pozicija": "Obrana",
+            "klub": "Borussia Mönchengladbach"
+          },
+          {
+            "id": 29,
+            "ime": "Julian",
+            "prezime": "Weigl",
+            "pozicija": "Vezni",
+            "klub": "Borussia Mönchengladbach"
+          }
+        ],
+        "broj_igraca": 26,
+        "prosjek_godina": 26.2,
+        "broj_bodova_prosle_godine": 34,
+        "broj_ligi_prvaka": 0,
+        "broj_kupova": 3,
+        "tm_vrijednost": 139.7
+      }
+    ]
+  ]
+}
