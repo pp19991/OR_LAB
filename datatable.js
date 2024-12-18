@@ -1,175 +1,211 @@
+import React, { useState,useEffect,useRef } from "react";
 
-function JSONclick(){
- 
-  console.log("klikno sam");
-}
 
-function prikazi(){
-    let optvalue=document.getElementById("atribut").value;
-    let text=document.getElementById("uv").value;
-    let path="http://localhost:8080/"+document.getElementById("tablica").value;
-    if(optvalue=="sva"){
-      if(text!=""){
-        let polje=text.split(", ");
-        console.log(polje);
-        polje.forEach(p=>{
-          let pomocno=p.split(":");
-          path=path+"?"+pomocno[0]+"="+pomocno[1];
-        });
-      };
+
+function Datatable(){
+    const [tablica, setTablica] = useState("klubovi");
+    const [stupac, setStupac] = useState("naziv");
+    const [vrijednost, setVrijednost] = useState("");
+    const [data,setData]=useState(null);
+    let variable="klubovi";
+    const hSubmit = async (event) => {
+        event.preventDefault();        
+        let url=`http://localhost:8080/${tablica}`;
+        console.log(url);
+        try {
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          const result = await response.json();
+          setData(result);
+          console.log(data);
+        } catch (err) {
+          console.log(err.message);
+
+      }
     }
-    else{
-      if(text!=""){
-        path=path+"?"+optvalue+"="+text;
-      };
+    const schange=(event)=>{
+      variable=event.target.value;
+      setTablica(event.target.value);
     }
     
-    let podaci;
-    console.log(text);
-    console.log(text.lenght);
-    console.log(path);
-    fetch(path, {
-        method: 'GET', 
-        headers: {
-          'Content-Type': 'application/json; charset=UTF-8' 
-        }
-      })
-        .then(response => response.json())
-        .then(data => {
-           console.log(data);
-           document.getElementById("prostor").remove();
-
-           let table=document.createElement("table");
-           table.id="prostor";
-        
-           let CSVstring="";
-           let tr=document.createElement("tr");
-           let thead=document.createElement("thead");
-            let lenght=Object.keys(data[0]).length;
-           Object.keys(data[0]).forEach((key,index)=>{
-              let th=document.createElement("th");
-              th.innerText=key;
-              tr.appendChild(th);
-              CSVstring+=key;
-              CSVstring+=(index==(lenght-1)?"\n":",");
-           });
-          
-           thead.appendChild(tr);
-
-           let tbody=document.createElement("tbody");
-           data.forEach(o=>{
-                let tr=document.createElement("tr");
-                let lenght1=Object.values(o).length;
-                Object.values(o).forEach((v,index)=>{
-                    let td=document.createElement("td");
-                    td.innerText=v;
-                    tr.appendChild(td);
-                    CSVstring+=v;
-                    CSVstring+=(index==(lenght1-1)?"\n":",");
-                });
-                tbody.appendChild(tr);
-           });
-
-           table.appendChild(thead);
-           table.appendChild(tbody);
-           
-
-
-           document.getElementById("linkovi").remove();
-           let div=document.createElement("div");
-           div.id="linkovi";
-           div.class="linkovi";
-           //JSON
-           let JSONlink=document.createElement("a");
-           JSONlink.innerText="Preuzmi podatke u JSON formatu";
-           JSONlink.href="#";
-           JSONlink.addEventListener("click",function() {
-              console.log("Uso sam");
-              const json = JSON.stringify(data, null, 2);
-              const b = new Blob([json], { type: 'application/json' });
-              const url = URL.createObjectURL(b);
-              JSONlink.href = url;
-              JSONlink.download = 'bundesliga.json';
-           });
-
-           //CSV
-           let CSVlink=document.createElement("a");
-           CSVlink.innerText="Preuzmi podatke u CSV formatu";
-           CSVlink.href="#";
-           CSVlink.addEventListener("click",function() {
-            const b = new Blob([CSVstring], { type: 'text/csv' });
-            const url = URL.createObjectURL(b);
-            CSVlink.href = url;
-            CSVlink.download = 'bundesliga.csv';
-         });
-
-           div.appendChild(JSONlink);
-            div.appendChild(document.createElement("br"));
-           div.appendChild(CSVlink);
-
-           document.body.appendChild(div);
-           document.body.appendChild(table);
-          
-           console.log(CSVstring);
-        })
-        .catch(error => {
-          console.error('Error:', error);
-        });
     
-}
-function promjeni(){
-    let tablica=document.getElementById("tablica").value;
-    let array=[];
-    let atribut=document.getElementById("atribut")
-    atribut.options.length = 0;
-    if(tablica=="stadioni"){
-        array=[
-            "naziv",      
-            "kapacitet",
-            "godina_osnutka"
-          ];
-    }
-    else if(tablica=="klubovi"){
-        array= [
-            "naziv",                        
+    const atribut = new Map([ ["sve", [
+      "k_naziv",
+            "k_grad",
+            "k_godina_osnutka",
+            "k_stadion",
+            "k_trener",
+            "k_broj_trofeja_ligi",
+            "k_broj_igraca",
+            "k_prosjek_godina",
+            "k_broj_bodova_prosle_godine",
+            "k_broj_ligi_prvaka",
+            "k_broj_kupova",
+            "k_tm_vrijednost",
+
+            "t_id",
+            "t_ime",
+            "t_prezime",
+
+            "i_id",
+            "i_ime",
+            "i_prezime",
+            "i_pozicija",
+            "i_klub",
+
+            "s_naziv",
+            "s_kapacitet",
+            "s_godina_osnutka"
+    ]],
+        ["klubovi", [
+            "naziv",
             "grad",
             "godina_osnutka",
-            "stadion",                      
-            "trener",                       
+            "stadion",
+            "trener",
             "broj_trofeja_ligi",
             "broj_igraca",
             "prosjek_godina",
             "broj_bodova_prosle_godine",
             "broj_ligi_prvaka",
             "broj_kupova",
-            "TM_vrijednost"
-          ];
-    }
-    else if(tablica=="treneri"){
-        array=[
-            "id",         
+            "tm_vrijednost"
+          ]],
+        ["treneri", [
+            "id",
             "ime",
             "prezime"
-          ];
-    }
-    else if(tablica=="igraci"){
-        array=[
-            "id",         
+          ]],
+        ["igraci", [
+            "id",
             "ime",
             "prezime",
             "pozicija",
-            "klub"        
-          ];
-    }
-    let option=document.createElement("option");
-    option.value="sva";
-    option.innerText="Sva polja(wildcard)";
-    atribut.appendChild(option);
-    array.forEach(el=>{
-        let option=document.createElement("option");
-        option.value=el;
-        option.innerText=el;
-        atribut.appendChild(option);
-    });
+            "klub"
+          ]
+        ],
+        ["stadioni", [
+            "naziv",
+            "kapacitet",
+            "godina_osnutka"
+          ]]
+    ]);
+    return (
+      <div>
+        <form >
+        <h3>Odaberi tablicu</h3>
+        <select value={tablica} onChange={schange} id="tablica">
+                <option value="sve">Sve</option>
+                <option value="klubovi">Klub</option>
+                <option value="treneri">Trener</option>
+                <option value="igraci">Igrac</option>
+                <option value="stadioni">Stadion</option>
+        </select>
+        <h3>Odaberi stupac</h3>
+        <select value={stupac} onChange={(event)=>setStupac(event.target.value)}>
+                {atribut.get(tablica)?.map((value)=>{
+                
+                    return (
+                        <option key={value} value={value}>
+                        {value}
+                        </option>
+                    );
+                    
+                })}
+        </select>
+        <h3>Upisi vrijednost</h3>
+        <input type="text" value={vrijednost} onChange={(event)=>setVrijednost(event.target.value)}/>
+        <h3>{vrijednost}</h3>
+        <button type="submit" onClick={hSubmit}>Sumbit</button>
+        </form>
+        {data!=null?(
+        <table>
+                <thead>
+                  <tr>
+                  {
+                    Object.keys(data[0])[0] === "igrac" ?(
+                      Object.keys(data[0]).map((key)=>{
+                        return(
+                          Object.keys(data[0][key]).map((v,idx)=>{
+                            return(
+                              <th key={idx}>{key+"_"+v}</th>
+                            );
+
+                          }
+                          )
+                        );
+
+                      }
+
+                      )
+                    ):(Object.keys(data[0]).map((k,idx)=>{
+                      return(
+                        <th key={idx}>{k}</th>
+                      );
+                    }
+
+                    ))
+                    
+                  }
+                  </tr>
+                </thead>
+                <tbody>
+                  {console.log(data)}
+                {
+                  
+                data?.map((o,idx)=>{
+                  if(Object.keys(o)[0]=="igrac"){
+                      return(
+                        <tr key={idx}>
+                          {
+                            Object.values(o).map((o1)=>{
+                              
+          
+
+                                return(
+                                  Object.values(o1).map((v,idx)=>{
+                                      return(
+                                        <td key={idx}>
+                                          {v}
+                                        </td>
+                                      );
+                                  })
+                                
+                                )
+
+
+                                
+                                }
+
+
+                                )
+                                  
+                            
+                          }
+                        </tr>
+                      );
+                  }
+                  else{
+                    return(
+                      <tr key={idx}>
+                        {Object.values(o).map((v,idx)=>{
+
+                          return (
+                            <td key={idx}>{v}</td>
+                          );
+
+                      })}
+                      </tr>
+                    );
+                }
+                })}
+                </tbody>
+        </table>):(<></>)
+        } 
+        </div>
+    );
+    
 }
-document.getElementById("prostor").style.display="none";
+export default Datatable;
