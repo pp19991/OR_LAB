@@ -1,16 +1,88 @@
 import React, { useState,useEffect,useRef } from "react";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
 
 
 function Datatable(){
+  const atribut = new Map([ ["sve", [
+    "k_naziv",
+          "k_grad",
+          "k_godina_osnutka",
+          "k_stadion",
+          "k_trener",
+          "k_broj_trofeja_ligi",
+          "k_broj_igraca",
+          "k_prosjek_godina",
+          "k_broj_bodova_prosle_godine",
+          "k_broj_ligi_prvaka",
+          "k_broj_kupova",
+          "k_tm_vrijednost",
+
+          "t_id",
+          "t_ime",
+          "t_prezime",
+
+          "i_id",
+          "i_ime",
+          "i_prezime",
+          "i_pozicija",
+          "i_klub",
+
+          "s_naziv",
+          "s_kapacitet",
+          "s_godina_osnutka"
+  ]],
+      ["klubovi", [
+          "naziv",
+          "grad",
+          "godina_osnutka",
+          "stadion",
+          "trener",
+          "broj_trofeja_ligi",
+          "broj_igraca",
+          "prosjek_godina",
+          "broj_bodova_prosle_godine",
+          "broj_ligi_prvaka",
+          "broj_kupova",
+          "tm_vrijednost"
+        ]],
+      ["treneri", [
+          "id",
+          "ime",
+          "prezime"
+        ]],
+      ["igraci", [
+          "id",
+          "ime",
+          "prezime",
+          "pozicija",
+          "klub"
+        ]
+      ],
+      ["stadioni", [
+          "naziv",
+          "kapacitet",
+          "godina_osnutka"
+        ]]
+  ]);
     const [tablica, setTablica] = useState("klubovi");
     const [stupac, setStupac] = useState("naziv");
     const [vrijednost, setVrijednost] = useState("");
     const [data,setData]=useState(null);
+    const [fvrijednost,setFVrijednost]=useState("");
     let variable="klubovi";
     const hSubmit = async (event) => {
         event.preventDefault();        
         let url=`http://localhost:8080/${tablica}`;
+        setFVrijednost(tablica);
+        if(vrijednost!=""){
+          if(tablica=="igraci" || tablica=="treneri" || tablica=="sve"){
+              url=url+"?id="+vrijednost;
+          }
+          else{
+            url=url+"?naziv="+vrijednost;
+          }
+        }
         console.log(url);
         try {
           const response = await fetch(url);
@@ -28,70 +100,41 @@ function Datatable(){
     const schange=(event)=>{
       variable=event.target.value;
       setTablica(event.target.value);
+      setStupac(atribut.get(event.target.value)[0]);
+    }
+    const uredi=(id)=>{
+      console.log(id);
+      
+     
+    }
+    const brisi=async (id)=>{
+      console.log(id);
+      let url=`http://localhost:8080/${fvrijednost}`;
+      if(tablica=="igraci" || tablica=="treneri" || tablica=="sve"){
+              url=url+"?id="+id;
+      }
+      else{
+            url=url+"?naziv="+id;
+      }
+       console.log(url); 
+       try {
+        const response = await fetch(url,{
+          method: 'DELETE'
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        setData((fvrijednost=="sve")?
+        (data.filter(o=>o["igrac"]["id"]!=id)):
+        (data))
+        
+      } catch (err) {
+        console.log(err.message);
+      }
     }
     
     
-    const atribut = new Map([ ["sve", [
-      "k_naziv",
-            "k_grad",
-            "k_godina_osnutka",
-            "k_stadion",
-            "k_trener",
-            "k_broj_trofeja_ligi",
-            "k_broj_igraca",
-            "k_prosjek_godina",
-            "k_broj_bodova_prosle_godine",
-            "k_broj_ligi_prvaka",
-            "k_broj_kupova",
-            "k_tm_vrijednost",
-
-            "t_id",
-            "t_ime",
-            "t_prezime",
-
-            "i_id",
-            "i_ime",
-            "i_prezime",
-            "i_pozicija",
-            "i_klub",
-
-            "s_naziv",
-            "s_kapacitet",
-            "s_godina_osnutka"
-    ]],
-        ["klubovi", [
-            "naziv",
-            "grad",
-            "godina_osnutka",
-            "stadion",
-            "trener",
-            "broj_trofeja_ligi",
-            "broj_igraca",
-            "prosjek_godina",
-            "broj_bodova_prosle_godine",
-            "broj_ligi_prvaka",
-            "broj_kupova",
-            "tm_vrijednost"
-          ]],
-        ["treneri", [
-            "id",
-            "ime",
-            "prezime"
-          ]],
-        ["igraci", [
-            "id",
-            "ime",
-            "prezime",
-            "pozicija",
-            "klub"
-          ]
-        ],
-        ["stadioni", [
-            "naziv",
-            "kapacitet",
-            "godina_osnutka"
-          ]]
-    ]);
+   
     return (
       <div>
         <form >
@@ -124,6 +167,8 @@ function Datatable(){
         <table>
                 <thead>
                   <tr>
+                  <td>Uredivanje</td>
+                  <td>Brisanje</td>
                   {
                     Object.keys(data[0])[0] === "igrac" ?(
                       Object.keys(data[0]).map((key)=>{
@@ -159,6 +204,8 @@ function Datatable(){
                   if(Object.keys(o)[0]=="igrac"){
                       return(
                         <tr key={idx}>
+                          <td><button  onClick={()=>uredi(o["igrac"]["id"])}><FontAwesomeIcon  icon={faEdit} /></button></td>
+                          <td><button  onClick={()=>brisi(o["igrac"]["id"])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
                           {
                             Object.values(o).map((o1)=>{
                               
@@ -189,9 +236,12 @@ function Datatable(){
                   }
                   else{
                     return(
-                      <tr key={idx}>
+                        <tr key={idx}>
+                        {console.log(Object.values(o)[0])}
+                        <td><button  onClick={()=>uredi(Object.values(o)[0])}><FontAwesomeIcon  icon={faEdit} /></button></td>
+                        <td><button  onClick={()=>brisi(Object.values(o)[0])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
                         {Object.values(o).map((v,idx)=>{
-
+                          
                           return (
                             <td key={idx}>{v}</td>
                           );
@@ -208,4 +258,5 @@ function Datatable(){
     );
     
 }
+
 export default Datatable;
