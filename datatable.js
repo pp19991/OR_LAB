@@ -70,6 +70,8 @@ function Datatable(){
     const [vrijednost, setVrijednost] = useState("");
     const [data,setData]=useState(null);
     const [fvrijednost,setFVrijednost]=useState("");
+    const [uredivanje,setUredivanje]=useState(false);
+    const[id_uredivanje,setIDU]=useState(-1000);
     let variable="klubovi";
     const hSubmit = async (event) => {
         event.preventDefault();        
@@ -103,9 +105,8 @@ function Datatable(){
       setStupac(atribut.get(event.target.value)[0]);
     }
     const uredi=(id)=>{
-      console.log(id);
-      
-     
+      setUredivanje(!uredivanje);
+      setIDU(id);
     }
     const brisi=async (id)=>{
       console.log(id);
@@ -126,7 +127,7 @@ function Datatable(){
         }
         setData((fvrijednost=="sve")?
         (data.filter(o=>o["igrac"]["id"]!=id)):
-        (data))
+        (data.filter(o=>o[atribut.get(fvrijednost)[0]]!=id)))
         
       } catch (err) {
         console.log(err.message);
@@ -236,18 +237,32 @@ function Datatable(){
                   }
                   else{
                     return(
-                        <tr key={idx}>
-                        {console.log(Object.values(o)[0])}
-                        <td><button  onClick={()=>uredi(Object.values(o)[0])}><FontAwesomeIcon  icon={faEdit} /></button></td>
-                        <td><button  onClick={()=>brisi(Object.values(o)[0])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
-                        {Object.values(o).map((v,idx)=>{
+                        (uredivanje && Object.values(o)[0]==id_uredivanje)?(<tr key={idx}>
                           
-                          return (
-                            <td key={idx}>{v}</td>
-                          );
-
-                      })}
-                      </tr>
+                          <td><button  onClick={()=>uredi(Object.values(o)[0])}><FontAwesomeIcon  icon={faEdit} /></button></td>
+                          <td><button  onClick={()=>brisi(Object.values(o)[0])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
+                          
+                          {Object.values(o).map((v,idx)=>{
+                            
+                            return (
+                              <td key={idx}><input type="text" value={v}/></td>
+                            );
+  
+                        })}
+                        </tr>):(<tr key={idx}>
+                          {console.log(Object.values(o)[0])}
+                          <td><button  onClick={()=>uredi(Object.values(o)[0])}><FontAwesomeIcon  icon={faEdit} /></button></td>
+                          <td><button  onClick={()=>brisi(Object.values(o)[0])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
+                          
+                          {Object.values(o).map((v,idx)=>{
+                            
+                            return (
+                              <td key={idx}>{v}</td>
+                            );
+  
+                        })}
+                        </tr>)
+                        
                     );
                 }
                 })}
