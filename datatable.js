@@ -72,7 +72,9 @@ function Datatable(){
     const [fvrijednost,setFVrijednost]=useState("");
     const [uredivanje,setUredivanje]=useState(false);
     const[id_uredivanje,setIDU]=useState(-1000);
+    const[dataobject,setDO]=useState();
     let variable="klubovi";
+
     const hSubmit = async (event) => {
         event.preventDefault();        
         let url=`http://localhost:8080/${tablica}`;
@@ -85,7 +87,7 @@ function Datatable(){
             url=url+"?naziv="+vrijednost;
           }
         }
-        console.log(url);
+       
         try {
           const response = await fetch(url);
           if (!response.ok) {
@@ -93,23 +95,34 @@ function Datatable(){
           }
           const result = await response.json();
           setData(result);
-          console.log(data);
+         
         } catch (err) {
           console.log(err.message);
 
       }
     }
+
     const schange=(event)=>{
       variable=event.target.value;
       setTablica(event.target.value);
       setStupac(atribut.get(event.target.value)[0]);
     }
-    const uredi=(id)=>{
+
+    const uredi=(id,idx)=>{
       setUredivanje(!uredivanje);
-      setIDU(id);
+      console.log(idx);
+      console.log(data[idx]);
+      setIDU(idx);
+      setDO(data[idx]);
+      
+    }
+    const ppromjeni=(event,key)=>{
+      console.log(key);
+      setDO((prev) => ({ ...prev, [key]: event.target.value }));
+      console.log(dataobject);
     }
     const brisi=async (id)=>{
-      console.log(id);
+      
       let url=`http://localhost:8080/${fvrijednost}`;
       if(tablica=="igraci" || tablica=="treneri" || tablica=="sve"){
               url=url+"?id="+id;
@@ -117,7 +130,7 @@ function Datatable(){
       else{
             url=url+"?naziv="+id;
       }
-       console.log(url); 
+      
        try {
         const response = await fetch(url,{
           method: 'DELETE'
@@ -198,19 +211,19 @@ function Datatable(){
                   </tr>
                 </thead>
                 <tbody>
-                  {console.log(data)}
+                 
                 {
                   
                 data?.map((o,idx)=>{
                   if(Object.keys(o)[0]=="igrac"){
                       return(
                         <tr key={idx}>
-                          <td><button  onClick={()=>uredi(o["igrac"]["id"])}><FontAwesomeIcon  icon={faEdit} /></button></td>
+                          <td><button  onClick={()=>uredi(o["igrac"]["id"],idx)}><FontAwesomeIcon  icon={faEdit} /></button></td>
                           <td><button  onClick={()=>brisi(o["igrac"]["id"])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
                           {
                             Object.values(o).map((o1)=>{
                               
-          
+                              
 
                                 return(
                                   Object.values(o1).map((v,idx)=>{
@@ -237,23 +250,10 @@ function Datatable(){
                   }
                   else{
                     return(
-                        (uredivanje && Object.values(o)[0]==id_uredivanje)?(<tr key={idx}>
+                        <tr key={idx}>
                           
-                          <td><button  onClick={()=>uredi(Object.values(o)[0])}><FontAwesomeIcon  icon={faEdit} /></button></td>
+                          <td><button  onClick={()=>uredi(Object.values(o)[0],idx)}><FontAwesomeIcon  icon={faEdit} /></button></td>
                           <td><button  onClick={()=>brisi(Object.values(o)[0])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
-                          
-                          {Object.values(o).map((v,idx)=>{
-                            
-                            return (
-                              <td key={idx}><input type="text" value={v}/></td>
-                            );
-  
-                        })}
-                        </tr>):(<tr key={idx}>
-                          {console.log(Object.values(o)[0])}
-                          <td><button  onClick={()=>uredi(Object.values(o)[0])}><FontAwesomeIcon  icon={faEdit} /></button></td>
-                          <td><button  onClick={()=>brisi(Object.values(o)[0])}><FontAwesomeIcon  icon={faTrash} style={{ color: 'red' }} /></button></td>
-                          
                           {Object.values(o).map((v,idx)=>{
                             
                             return (
@@ -261,14 +261,33 @@ function Datatable(){
                             );
   
                         })}
-                        </tr>)
+                        </tr>
                         
                     );
                 }
                 })}
                 </tbody>
         </table>):(<></>)
-        } 
+        }
+        {uredivanje && (
+        <div className="modal">
+          <div className="modal-content">
+            <h1>Modal</h1>
+            <div className="div">
+            { 
+              Object.keys(dataobject).map((k)=>{
+                return(
+                  <label key={k}>{k}: {(["id","naziv"].includes(k)? <input type="text" value={dataobject[k]} readOnly/> :<input type="text" value={dataobject[k]} onChange={(event)=>ppromjeni(event,k)} 
+                  />)}</label>
+                )
+              })
+            }
+            </div>
+            <button >Save</button>
+            <button onClick={() => setUredivanje(false)}>Cancel</button>
+          </div>
+        </div>
+      )} 
         </div>
     );
     
