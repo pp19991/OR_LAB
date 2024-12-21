@@ -1,6 +1,6 @@
 import React, { useState,useEffect,useRef } from "react";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faTrash,faEdit } from '@fortawesome/free-solid-svg-icons';
+import { faTrash,faEdit, faTabletButton } from '@fortawesome/free-solid-svg-icons';
 
 
 function Datatable(){
@@ -71,6 +71,7 @@ function Datatable(){
     const [data,setData]=useState(null);
     const [fvrijednost,setFVrijednost]=useState("");
     const [uredivanje,setUredivanje]=useState(false);
+    const [dodavanje,setDodavanje]=useState(false);
     const[id_uredivanje,setIDU]=useState(-1000);
     const[dataobject,setDO]=useState();
     let variable="klubovi";
@@ -125,6 +126,9 @@ function Datatable(){
       const copy = { ...dataobject };
       copy[key][key1]=event.target.value;
       setDO(copy);
+    }
+    const Addrow=()=>{
+        setDodavanje(true);
     }
     const brisi=async (id)=>{
       
@@ -200,6 +204,8 @@ function Datatable(){
         <input type="text" value={vrijednost} onChange={(event)=>setVrijednost(event.target.value)}/>
         <h3>{vrijednost}</h3>
         <button type="submit" onClick={hSubmit}>Sumbit</button>
+        {fvrijednost && <button type="button" onClick={Addrow}>Add</button>}
+
         </form>
         {data!=null?(
         <table>
@@ -296,7 +302,7 @@ function Datatable(){
         {uredivanje && (
         <div className="modal">
           <div className="modal-content">
-            <h1>Modal</h1>
+            <h1>Edit</h1>
             <div className="div">
             {(fvrijednost=="sve"?Object.keys(dataobject).map((k)=>{
                 return(
@@ -324,6 +330,15 @@ function Datatable(){
           </div>
         </div>
       )} 
+      {dodavanje && (
+        <div className="modal">
+          <div className="modal-content">
+            <h1>Add</h1>
+            <button onClick={editSave}>Add</button>
+            <button onClick={() => setDodavanje(false)}>Cancel</button>
+          </div> 
+          </div>
+      )}
         </div>
     );
     
