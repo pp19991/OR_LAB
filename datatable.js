@@ -114,12 +114,17 @@ function Datatable(){
       console.log(data[idx]);
       setIDU(idx);
       setDO(data[idx]);
-      
+      console.log(data[idx]);
     }
     const ppromjeni=(event,key)=>{
       console.log(key);
       setDO((prev) => ({ ...prev, [key]: event.target.value }));
       console.log(dataobject);
+    }
+    const ppromjeni1=(event,key,key1)=>{
+      const copy = { ...dataobject };
+      copy[key][key1]=event.target.value;
+      setDO(copy);
     }
     const brisi=async (id)=>{
       
@@ -142,6 +147,25 @@ function Datatable(){
         (data.filter(o=>o["igrac"]["id"]!=id)):
         (data.filter(o=>o[atribut.get(fvrijednost)[0]]!=id)))
         
+      } catch (err) {
+        console.log(err.message);
+      }
+    }
+    const editSave=async ()=>{
+      let url=`http://localhost:8080/${fvrijednost}`;
+      try {
+        const response = await fetch(url,{
+          method: 'PUT',
+          headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(dataobject)
+
+        });
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+        setUredivanje(false);
       } catch (err) {
         console.log(err.message);
       }
@@ -274,16 +298,28 @@ function Datatable(){
           <div className="modal-content">
             <h1>Modal</h1>
             <div className="div">
-            { 
-              Object.keys(dataobject).map((k)=>{
+            {(fvrijednost=="sve"?Object.keys(dataobject).map((k)=>{
+                return(
+                  <div key={k}>
+                    <h2>{k}</h2>
+                    {Object.keys(dataobject[k]).map((k1)=>{
+                          return(
+                            <label key={k1}>{k1}: {(["id","naziv"].includes(k1)? <input type="text" value={dataobject[k][k1]} readOnly/> :<input type="text" value={dataobject[k][k1]} onChange={(event)=>ppromjeni1(event,k,k1)} 
+                          />)}</label>
+                          )
+                    })}
+                  </div>
+                )
+              }):Object.keys(dataobject).map((k)=>{
                 return(
                   <label key={k}>{k}: {(["id","naziv"].includes(k)? <input type="text" value={dataobject[k]} readOnly/> :<input type="text" value={dataobject[k]} onChange={(event)=>ppromjeni(event,k)} 
                   />)}</label>
                 )
-              })
+              })) 
+              
             }
             </div>
-            <button >Save</button>
+            <button onClick={editSave}>Save</button>
             <button onClick={() => setUredivanje(false)}>Cancel</button>
           </div>
         </div>
