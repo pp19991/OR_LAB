@@ -74,6 +74,7 @@ function Datatable(){
     const [dodavanje,setDodavanje]=useState(false);
     const[id_uredivanje,setIDU]=useState(-1000);
     const[dataobject,setDO]=useState();
+    const[addObject,setAO]=useState();
     let variable="klubovi";
 
     const hSubmit = async (event) => {
@@ -103,6 +104,10 @@ function Datatable(){
       }
     }
 
+    const addPromjeni=(event,k)=>{
+      setAO((prev) => ({ ...prev, [k]: event.target.value }));
+    }
+
     const schange=(event)=>{
       variable=event.target.value;
       setTablica(event.target.value);
@@ -117,19 +122,32 @@ function Datatable(){
       setDO(data[idx]);
       console.log(data[idx]);
     }
+
+
     const ppromjeni=(event,key)=>{
       console.log(key);
       setDO((prev) => ({ ...prev, [key]: event.target.value }));
       console.log(dataobject);
     }
+
+
     const ppromjeni1=(event,key,key1)=>{
       const copy = { ...dataobject };
       copy[key][key1]=event.target.value;
       setDO(copy);
     }
+
+
     const Addrow=()=>{
         setDodavanje(true);
+        const pomObject={}
+        atribut.get(fvrijednost).forEach((v)=>{
+              pomObject[v]=""
+        })
+        setAO(pomObject);
     }
+
+
     const brisi=async (id)=>{
       
       let url=`http://localhost:8080/${fvrijednost}`;
@@ -155,6 +173,9 @@ function Datatable(){
         console.log(err.message);
       }
     }
+
+
+
     const editSave=async ()=>{
       let url=`http://localhost:8080/${fvrijednost}`;
       try {
@@ -174,7 +195,10 @@ function Datatable(){
         console.log(err.message);
       }
     }
-    
+    const addSave=()=>{
+      console(addObject);
+  }
+
     
    
     return (
@@ -334,7 +358,12 @@ function Datatable(){
         <div className="modal">
           <div className="modal-content">
             <h1>Add</h1>
-            <button onClick={editSave}>Add</button>
+            {atribut.get(fvrijednost).map((k=>{
+              return(
+                <label key={k}>{k}: <input type="text" value={addObject[k]} onChange={(event)=>addPromjeni(event,k)}/></label>
+              )
+            }))}
+            <button onClick={addSave}>Add</button>
             <button onClick={() => setDodavanje(false)}>Cancel</button>
           </div> 
           </div>
