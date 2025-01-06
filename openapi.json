@@ -1,0 +1,796 @@
+{
+    "openapi": "3.0.3",
+    "info": {
+        "title": "Bundesliga klubov",
+        "description": "Podaci o bundesliga klubovima",
+        "contact": {
+            "name": "Patrik Pašić",
+            "email": "pp003522189@fer.hr"
+        },
+        "license": {
+            "name": "Creative Commons Zero v1.0 Universal",
+            "url": "https://creativecommons.org/publicdomain/zero/1.0/"
+        },
+        "version": "3.0.0"
+    },
+    "paths": {
+        "/sve": {
+            "get": {
+                "summary": "Dohvati cijelokupne podatke",
+                "description": "Dohvati sve cijelokupne podatke ili pojedinacni cijelokupni",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID igraca",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dohvaceni cjelokupni podaci",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfPodatakList"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unijeta vrijednost treba biti broj, a ne slova/Unijeta vrijednost je prevelika"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Dodaj cijelokupni podatak",
+                "description": "Dodaj cijelokupni podatak",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Podatak"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Dodan cijelokupni podatak",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Objekt s ovim kljucem id/naziv postoji u bazi, unesi neku vrijednost koja ne postoji"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Obrisi cijelokupni podatak",
+                "description": "Obrisi cijelokupni podatak na temelju id igraca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID igracaa.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Izbrisan podatak",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Promjena cijelokupnog podatka",
+                "description": "Promjena cijelokupnog podatka",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Podatak"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Promjenjen cijelokupni podatak podatak",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unijeta vrijednost treba biti broj, a ne slova/Unijeta vrijednost je prevelika"
+                    }
+                }
+            }
+        },
+        "/klubovi": {
+            "get": {
+                "summary": "Dohvati podatke o klubovima",
+                "description": "Dohvati podatke o klubovima ili o klubu",
+                "parameters": [
+                    {
+                        "name": "naziv",
+                        "in": "query",
+                        "description": "Ime kluba",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dohvaceni podaci o klubovima",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfKlubList"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unijeta vrijednost treba biti broj, a ne slova/Unijeta vrijednost je prevelika"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Dodaj klub",
+                "description": "Dodaj klub",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Klub"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Dodan klub",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Objekt s ovim kljucem id/naziv postoji u bazi, unesi neku vrijednost koja ne postoji"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Brisanje klubova",
+                "description": "Brisanje klubova",
+                "parameters": [
+                    {
+                        "name": "naziv",
+                        "in": "query",
+                        "description": "Ime kluba",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Izbrisan klub",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Promjena podatka o klubu",
+                "description": "Promjena podatka o klubu",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Klub"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Promjenjen klub",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unijeta vrijednost treba biti broj, a ne slova/Unijeta vrijednost je prevelika"
+                    }
+                }
+            }
+        },
+        "/igraci": {
+            "get": {
+                "summary": "Dohvat igrac",
+                "description": "Dohvat svih igraca ili pojedinacno",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID igraca",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Dohvaceni podaci o igracima",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfIgracList"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unijeta vrijednost treba biti broj, a ne slova/Unijeta vrijednost je prevelika"
+                    }
+                }
+            },
+            "post": {
+                "summary": "Dodaj igraca",
+                "description": "Dodavanje igrac",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Igrac"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Dodan igrac",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Objekt s ovim kljucem id/naziv postoji u bazi, unesi neku vrijednost koja ne postoji"
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Brisanje igraca",
+                "description": "Brisanje igraca",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID igraca",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Izbrisan igrac",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Promjena podataka o igracu",
+                "description": "Promjena podataka o igracu",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Igrac"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Promjenjenn igrac",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    },
+                    "400": {
+                        "description": "Unijeta vrijednost treba biti broj, a ne slova/Unijeta vrijednost je prevelika"
+                    }
+                }
+            }
+        },
+        "/stadioni": {
+            "get": {
+                "summary": "Dohvati stadione",
+                "description": "Vraća popis stadiona, opcionalno filtrirano prema nazivu.",
+                "parameters": [
+                    {
+                        "name": "naziv",
+                        "in": "query",
+                        "description": "Naziv stadiona za filtriranje.",
+                        "required": false,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Uspješno dohvaćeni podaci o stadionima.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfStadionList"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Dodaj stadion",
+                "description": "Dodaje novi stadion.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Stadion"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Stadion uspješno dodan.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Izbriši stadion",
+                "description": "Briše stadion prema nazivu.",
+                "parameters": [
+                    {
+                        "name": "naziv",
+                        "in": "query",
+                        "description": "Naziv stadiona za brisanje.",
+                        "required": true,
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Stadion uspješno izbrisan.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Ažuriraj stadion",
+                "description": "Ažurira postojeći stadion.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Stadion"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Stadion uspješno ažuriran.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/treneri": {
+            "get": {
+                "summary": "Dohvati trenere",
+                "description": "Vraća popis trenera, opcionalno filtrirano prema ID-u.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID trenera za filtriranje.",
+                        "required": false,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Uspješno dohvaćeni podaci o trenerima.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfTrenerList"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "summary": "Dodaj trenera",
+                "description": "Dodaje novog trenera.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Trener"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Trener uspješno dodan.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Izbriši trenera",
+                "description": "Briše trenera prema ID-u.",
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "query",
+                        "description": "ID trenera za brisanje.",
+                        "required": true,
+                        "schema": {
+                            "type": "integer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Trener uspješno izbrisan.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "put": {
+                "summary": "Ažuriraj trenera",
+                "description": "Ažurira postojećeg trenera.",
+                "requestBody": {
+                    "required": true,
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Trener"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Trener uspješno ažuriran.",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/ResponseCOfString"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Igrac": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "ime": {
+                        "type": "string"
+                    },
+                    "prezime": {
+                        "type": "string"
+                    },
+                    "pozicija": {
+                        "type": "string"
+                    },
+                    "klub": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Klub": {
+                "type": "object",
+                "properties": {
+                    "naziv": {
+                        "type": "string"
+                    },
+                    "grad": {
+                        "type": "string"
+                    },
+                    "godinaOsnutka": {
+                        "type": "integer"
+                    },
+                    "brojTrofejaLigi": {
+                        "type": "integer"
+                    },
+                    "brojIgraca": {
+                        "type": "integer"
+                    },
+                    "prosjekGodina": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "brojBodovaProsleGodine": {
+                        "type": "integer"
+                    },
+                    "brojLigiPrvaka": {
+                        "type": "integer"
+                    },
+                    "brojKupova": {
+                        "type": "integer"
+                    },
+                    "tmVrijednost": {
+                        "type": "number",
+                        "format": "double"
+                    },
+                    "stadion": {
+                        "type": "string"
+                    },
+                    "trener": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Trener": {
+                "type": "object",
+                "properties": {
+                    "id": {
+                        "type": "integer"
+                    },
+                    "ime": {
+                        "type": "string"
+                    },
+                    "prezime": {
+                        "type": "string"
+                    }
+                }
+            },
+            "Stadion": {
+                "type": "object",
+                "properties": {
+                    "naziv": {
+                        "type": "string"
+                    },
+                    "kapacitet": {
+                        "type": "integer"
+                    },
+                    "godinaOsnutka": {
+                        "type": "integer"
+                    }
+                }
+            },
+            "Podatak": {
+                "type": "object",
+                "properties": {
+                    "igrac": {
+                        "$ref": "#/components/schemas/Igrac"
+                    },
+                    "klub": {
+                        "$ref": "#/components/schemas/Klub"
+                    },
+                    "trener": {
+                        "$ref": "#/components/schemas/Trener"
+                    },
+                    "stadion": {
+                        "$ref": "#/components/schemas/Stadion"
+                    }
+                }
+            },
+            "ResponseCOfString": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "string"
+                    }
+                }
+            },
+            "ResponseCOfPodatakList": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Podatak"
+                        }
+                    }
+                }
+            },
+            "ResponseCOfKlubList": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Klub"
+                        }
+                    }
+                }
+            },
+            "ResponseCOfIgracList": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Igrac"
+                        }
+                    }
+                }
+            },
+            "ResponseCOfTrenerList": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Trener"
+                        }
+                    }
+                }
+            },
+            "ResponseCOfStadionList": {
+                "type": "object",
+                "properties": {
+                    "status": {
+                        "type": "string"
+                    },
+                    "message": {
+                        "type": "string"
+                    },
+                    "response": {
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Stadion"
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
