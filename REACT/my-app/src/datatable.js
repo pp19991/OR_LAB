@@ -78,14 +78,13 @@ function Datatable(){
     const[id_uredivanje,setIDU]=useState(-1000);
     const[dataobject,setDO]=useState();
     const[addObject,setAO]=useState();
-    const[error,setError]=useState({});
     let variable="klubovi";
   
     
     const hSubmit = async (event) => {
         event.preventDefault();        
         let url=`http://localhost:8080/${tablica}`;
-        
+        setFVrijednost(tablica);
         if(vrijednost!=""){
           if(tablica=="igraci" || tablica=="treneri" || tablica=="sve"){
               url=url+"?id="+vrijednost;
@@ -96,19 +95,23 @@ function Datatable(){
         }
        
         try {
-          const response = await fetch(url);
-
+          const response = await fetch(url, {
+            method: "GET",
+            headers: {
+              "Content-Type": "application/json",
+            },
+            credentials: "include", // Include cookies or authorization headers if needed
+          })
           if (!response.ok) {
-            const errorBody = await response.json(); 
-            throw new Error(`HTTP error! status: ${errorBody.status}, body: ${errorBody.message}`);
+            throw new Error(`HTTP error! status: ${response.status}`);
           }
-          setFVrijednost(tablica);
           const result = await response.json();
-          setData(result.response);
+          setData(result);
           console.log(result);
         } catch (err) {
-          alert(err.message);
-        }
+          console.log(err.message);
+
+      }
     }
 
     const addPromjeni=(event,k)=>{
@@ -206,21 +209,18 @@ function Datatable(){
       
        try {
         const response = await fetch(url,{
-          method: 'DELETE'
+          method: 'DELETE',
+          credentials: "include"
         });
         if (!response.ok) {
-          console.log("response.body: "+response.body);
-          console.log("response: "+response);
-          const errorBody = await response.json(); 
-          throw new Error(`HTTP error! status: ${errorBody.status}, body: ${errorBody.message}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         setData((fvrijednost=="sve")?
         (data.filter(o=>o["igrac"]["id"]!=id)):
         (data.filter(o=>o[atribut.get(fvrijednost)[0]]!=id)))
         
       } catch (err) {
-        
-        alert(err.message);
+        console.log(err.message);
       }
     }
 
@@ -234,14 +234,12 @@ function Datatable(){
           headers: {
             'Content-Type': 'application/json'
         },
+        credentials: "include",
         body: JSON.stringify(dataobject)
 
         });
         if (!response.ok) {
-          console.log("response.body: "+response.body);
-          console.log("response: "+response);
-          const errorBody = await response.json(); 
-          throw new Error(`HTTP error! status: ${errorBody.status}, body: ${errorBody.message}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         setUredivanje(false);
         const copied = [...data];
@@ -249,9 +247,7 @@ function Datatable(){
         setData(copied)
 
       } catch (err) {
-        
-      
-        alert(err.message);
+        console.log(err.message);
       }
     }
     const addSave=async ()=>{
@@ -263,19 +259,17 @@ function Datatable(){
           headers: {
             'Content-Type': 'application/json'
         },
+        credentials: "include", 
         body: JSON.stringify(addObject)
 
         });
         if (!response.ok) {
-          console.log("response.body: "+response.body);
-          console.log("response: "+response);
-          const errorBody = await response.json(); 
-          throw new Error(`HTTP error! status: ${errorBody.status}, body: ${errorBody.message}`);
+          throw new Error(`HTTP error! status: ${response.status}`);
         }
         setDodavanje(false);
         setData([...data, addObject]);
       } catch (err) {
-        alert(err.message);
+        console.log(err.message);
       }
     }
       
@@ -309,7 +303,7 @@ function Datatable(){
           </select>
           <h3>Upisi vrijednost</h3>
           <input type="text" className="input" value={vrijednost} onChange={(event)=>setVrijednost(event.target.value)}/>
-          
+          <h3>{vrijednost}</h3>
           <button className="button" type="submit" onClick={hSubmit}>Sumbit</button>
           <button className="button" type="button" onClick={Addrow}>Add</button>
 
@@ -392,7 +386,7 @@ function Datatable(){
                 }
                 })}
                 </tbody>
-        </table></div>):(<h2 className="nr">Nema rezultata</h2>)
+        </table></div>):(<h2 className="rez">Nema rezultata</h2>)
         }
         {uredivanje && (
         <div className="modal">

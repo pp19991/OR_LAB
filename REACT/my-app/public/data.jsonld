@@ -1,0 +1,70 @@
+{
+  "@context": {
+    "@vocab": "https://schema.org/",
+    "ime": "givenName",
+    "prezime": "familyName",
+    "pozicija": "jobTitle",
+    "foundingDate": "foundingDate",
+    "dodatnaSvojstva": "additionalProperty",
+    "naziv": "name",
+    "kapacitet": "maximumAttendeeCapacity",
+    "godinaOsnutka": "foundingDate",
+    "grad": "location"
+  },
+  "igrac": {
+    "@type": "Person",
+    "ime": "Alphonso",
+    "prezime": "Davies",
+    "pozicija": "Defender"
+  },
+  "trener": {
+    "@type": "Person",
+    "ime": "Vincent",
+    "prezime": "Kompany"
+  },
+  "stadion": {
+    "@type": "StadiumOrArena",
+    "naziv": "Allianz Arena",
+    "kapacitet": 75024,
+    "godinaOsnutka": 2005
+  },
+  "klub": {
+    "@type": "SportsTeam",
+    "naziv": "Bayern Munich",
+    "grad": {
+      "@type": "Place",
+      "naziv": "Munich"
+    },
+    "godinaOsnutka": 1900,
+    "dodatnaSvojstva": [
+      {
+        "name": "brojTrofejaLigi",
+        "value": 33
+      },
+      {
+        "name": "brojIgraca",
+        "value": 28
+      },
+      {
+        "name": "prosjekGodina",
+        "value": 26.5
+      },
+      {
+        "name": "brojBodovaProsleGodine",
+        "value": 72
+      },
+      {
+        "name": "brojLigiPrvaka",
+        "value": 6
+      },
+      {
+        "name": "brojKupova",
+        "value": 20
+      },
+      {
+        "name": "tmVrijednost",
+        "value": 939.7
+      }
+    ]
+  }
+}

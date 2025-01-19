@@ -1,10 +1,15 @@
 package com.OR.OR;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
+import java.io.IOException;
+import java.lang.reflect.Field;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Collections;
 import java.util.List;
 
 @Repository
@@ -217,7 +222,6 @@ public class AllRepository {
         );
     }
 
-    @Transactional
     public void postSve(Podatak podatak) {
         postKlub(podatak.getKlub());
         postIgrac(podatak.getIgrac());
@@ -264,7 +268,6 @@ public class AllRepository {
 
 
     //PUT
-    @Transactional
     public void putSve(Podatak podatak) {
         putKlub(podatak.getKlub());
         putStadion(podatak.getStadion());
@@ -325,6 +328,40 @@ public class AllRepository {
         );
     }
 
+    public void osFajlove(List<Podatak> podaci) throws IOException, IllegalAccessException {
+        ObjectMapper objectMapper = new ObjectMapper();
+        String jsonString = objectMapper.writeValueAsString(podaci);
+        Files.write(Paths.get("C:\\Users\\Korisnik\\Desktop\\labos-4\\REACT\\my-app\\public\\klubovi_bundeslige.json"), jsonString.getBytes());
+        StringBuilder string_csv = new StringBuilder("k_naziv,k_grad,k_godina_osnutka,k_stadion,k_trener,k_broj_trofeja_ligi,k_broj_igraca,k_prosjek_godina,k_broj_bodova_prosle_godine,k_broj_ligi_prvaka,k_broj_kupova,k_tm_vrijednost,t_id,t_ime,t_prezime,i_id,i_ime,i_prezime,i_pozicija,i_klub,s_naziv,s_kapacitet,s_godina_osnutka\n");
+        for(Podatak podatak:podaci){
+            Field[] fields;
+            fields=podatak.getKlub().getClass().getDeclaredFields();
+            for (Field field : fields) {
+                field.setAccessible(true); // Allow access to private fields
+
+                string_csv.append(field.get(podatak.getKlub())+",");
+            }
+            fields=podatak.getTrener().getClass().getDeclaredFields();
+            for (Field field : fields) {
+                field.setAccessible(true); // Allow access to private fields
+                string_csv.append(field.get(podatak.getTrener())+",");
+            }
+            fields=podatak.getIgrac().getClass().getDeclaredFields();
+            for (Field field : fields) {
+                field.setAccessible(true); // Allow access to private fields
+                string_csv.append(field.get(podatak.getIgrac())+",");
+            }
+            fields=podatak.getStadion().getClass().getDeclaredFields();
+            for (Field field : fields) {
+                field.setAccessible(true); // Allow access to private fields
+                string_csv.append(field.get(podatak.getStadion())+",");
+            }
+            string_csv.deleteCharAt(string_csv.length() - 1);
+            string_csv.append("\n");
+        }
+        Files.write(Paths.get("C:\\Users\\Korisnik\\Desktop\\labos-4\\REACT\\my-app\\public\\klubovi_bundeslige.csv"), string_csv.toString().getBytes());
+
+    }
 }
 
 

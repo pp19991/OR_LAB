@@ -145,6 +145,14 @@ a:link {
     border: 2px groove black;
     border-radius: 40px; 
   }
+  .button2{
+    display: block;
+    
+    width: 70%;
+    
+    border: 2px groove black;
+    border-radius: 40px; 
+  }
   .divsve{
     display: flex;
     flex-direction: column;
@@ -156,6 +164,26 @@ a:link {
     justify-content: center;
     align-items: center;
   }
-  .nr{
+  .glavni1{
+    background-color:  #e1b382;
+    width: 30%;
+    height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;  
+    align-items: center; 
+    border: 2px groove black;
+    border-radius: 40px; 
+    margin-top: 10%;
+  }
+  .rez{
     text-align: center;
+  }
+  .sign{
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 100px;
   }
