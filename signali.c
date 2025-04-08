@@ -32,10 +32,15 @@ void *Glavni(void *x){
     act.sa_handler=obrada_pr;
     
     sigemptyset(&act.sa_mask);
+    sigaddset(&act.sa_mask,10);
     sigaction(10,&act,NULL);
+    sigaddset(&act.sa_mask,11);
     sigaction(11,&act,NULL);
+    sigaddset(&act.sa_mask,12);
     sigaction(12,&act,NULL);
+    sigaddset(&act.sa_mask,13);
     sigaction(13,&act,NULL);
+    sigaddset(&act.sa_mask,14);
     sigaction(14,&act,NULL);
     printf("Pokretanje glavne dretve s TID=%ld\n", (long) syscall(SYS_gettid));
     int i=1;
@@ -157,7 +162,8 @@ void ispis(){
     for(i=4;i>=0;i--){
         printf("%d",K_Z[i]);
     }
-    printf("Stog- ");
+    printf(", ");
+    printf("Stog-");
     struct clan* pmc=vrh;
     while(pmc!=NULL){
         for(i=4;i>=0;i--){
